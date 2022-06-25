@@ -6,7 +6,7 @@ async function fetchQuotes(setContent, setAuthor) {
   const url = 'https://api.quotable.io/random'
   const quote = await fetch(url).then(resp => resp.json())
   setContent(quote.content)
-  setAuthor("-- " + quote.author)
+  setAuthor(quote.author)
 }
 
 function App() {
@@ -15,12 +15,16 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>{content}</p>
-        <code>{author}</code>
-        <button className="fetch" onClick={() => fetchQuotes(setContent, setAuthor)}>GET</button>
-      </header>
-    </div >
+      <div className="card">
+        <div className="header">
+          <div className="content">{content}</div>
+          <div className="author">{author}</div>
+        </div>
+        <div className="footer">
+          <button className="button" onClick={() => fetchQuotes(setContent, setAuthor)}>Next Quote</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
