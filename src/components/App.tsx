@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
 import '../styles/App.css';
 
 function App() {
@@ -7,8 +6,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          The world is beautiful
         </p>
+        <code>-- Peter</code>
       </header>
     </div>
   );
