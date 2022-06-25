@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/App.css';
 
-//@ts-ignore
-async function fetchQuotes(setContent, setAuthor) {
-  const url = 'https://api.quotable.io/random'
-  const quote = await fetch(url).then(resp => resp.json())
-  setContent(quote.content)
-  setAuthor(quote.author)
-}
-
 function App() {
+  // hooks
   const [content, setContent] = useState("")
   const [author, setAuthor] = useState("")
+
+  // fetch
+  async function fetchQuote() {
+    const url = 'https://api.quotable.io/random'
+    const quote = await fetch(url).then(resp => resp.json())
+    setContent(quote.content)
+    setAuthor(quote.author)
+  }
+
+  // on mount
+  useEffect(() => { fetchQuote() }, [])
 
   return (
     <div className="App">
@@ -21,7 +25,7 @@ function App() {
           <div className="author">{author}</div>
         </div>
         <div className="footer">
-          <button className="button" onClick={() => fetchQuotes(setContent, setAuthor)}>Next Quote</button>
+          <button className="button" onClick={() => fetchQuote()}>Next Quote</button>
         </div>
       </div>
     </div>
