@@ -44,3 +44,14 @@
   background-color: #dc8a1f;
   border-width: 0;
 }
+
+.button:hover,
+.button:focus {
+  opacity: 0.9;
+  outline: 0;
+}
+
+.button:active {
+  box-shadow: 0 5px 5px rgba(1,1,0,0.5);
+  margin-top: 6px;
+}
