@@ -1,29 +1,35 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { states } from '../App'
 import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
+import { Entry } from '../../types'
 
 
 function Main() {
-  // hooks
-  const [content, setContent] = useState("")
-  const [author, setAuthor] = useState("")
+  const {
+    entries: { entries, pushEntry }
+  } = useContext(states)
 
-  // fetch
   async function fetchQuote() {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
-    setContent(quote.content)
-    setAuthor(quote.author)
+    pushEntry({
+      content: quote.content,
+      author: quote.author,
+    })
   }
   // on mount
   useEffect(() => { fetchQuote() }, [])
 
   return (
     <>
-      <QuoteCard
-        content={content}
-        author={author}
-      />
+      {entries
+        .map((entry: Entry, i: number) =>
+          <QuoteCard
+            key={i}
+            content={entry.content}
+            author={entry.author}
+          />)}
       <NextButton fetchQuote={fetchQuote} />
     </>
   )
