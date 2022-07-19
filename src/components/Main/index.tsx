@@ -1,5 +1,17 @@
 import { useState, useEffect } from 'react'
+import styled from '@emotion/styled'
 
+
+const Div = styled.div`
+  margin: 10%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 50px;
+  box-shadow: 0 24px 31px rgba(1,1,0,0.5);
+  background-color: #e6e183;
+`
 
 function Main() {
   // hooks
@@ -18,7 +30,7 @@ function Main() {
   useEffect(() => { fetchQuote() }, [])
 
   return (
-    <div className="card">
+    <Div>
       <div className="header">
         <div className="content">{content}</div>
         <div className="author">{author}</div>
@@ -26,7 +38,7 @@ function Main() {
       <div className="footer">
         <button className="button" onClick={() => fetchQuote()}>Next Quote</button>
       </div>
-    </div>
+    </Div>
   )
 }
 

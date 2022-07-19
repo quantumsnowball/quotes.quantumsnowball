@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react'
-import Container from '@mui/material/Container'
 import '../styles/App.css'
+import styled from '@emotion/styled'
 import Main from '../components/Main'
 
 
+const Div = styled.div`
+  min-height: 100vh;
+  min-width: 100vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  background-color: #6c692a;
+  color: white;
+`
+
 function App() {
   return (
-    <Container
-      disableGutters={true}
-      sx={{
-        minHeight: '100vh',
-        minWidth: '100vw',
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: '#6c692a',
-        color: 'white',
-      }}
-    >
+    <Div >
       <Main />
-    </Container>
+    </Div>
   )
 }
 
