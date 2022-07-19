@@ -1,5 +1,7 @@
 import { createContext } from 'react'
 import '../styles/App.css'
+import { ThemeProvider } from '@mui/material'
+import useColorTheme from '../hooks/useColorTheme'
 import styled from '@emotion/styled'
 import Main from '../components/Main'
 import useArray from '../hooks/useArray'
@@ -19,6 +21,7 @@ const Div = styled.div`
 export const states = createContext<States>({} as States)
 
 function App() {
+  const { toggleMode, theme } = useColorTheme('dark')
   const {
     value: entries,
     setValue: setEntries,
@@ -29,9 +32,11 @@ function App() {
     <states.Provider value={{
       entries: { entries, setEntries, pushEntry },
     }}>
-      <Div >
-        <Main />
-      </Div>
+      <ThemeProvider theme={theme}>
+        <Div >
+          <Main />
+        </Div>
+      </ThemeProvider>
     </states.Provider >
   )
 }

@@ -3,6 +3,8 @@ export interface Entry {
   author: string
 }
 
+export type ColorMode = 'light' | 'dark'
+
 export interface States {
   entries: {
     entries: Entry[],
