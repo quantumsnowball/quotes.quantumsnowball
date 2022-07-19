@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/App.css';
+import React, { useEffect, useState } from 'react'
+import '../styles/App.css'
 
 function App() {
   // hooks
@@ -29,8 +29,8 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
 
