@@ -5,7 +5,7 @@ function useArray<T>(initialValue: T[]) {
   const [value, setValue] = useState(initialValue)
 
   const push = useCallback((element: T) => {
-    setValue(oldValue => [...oldValue, element])
+    setValue(oldValue => [element, ...oldValue])
   }, [])
 
   const remove = useCallback((index: number) => {
