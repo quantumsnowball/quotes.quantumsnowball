@@ -1,13 +1,17 @@
 import styled from '@emotion/styled'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 
 const Div = styled.div`
-  margin: 10%;
+  margin: 2%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 50px;
   box-shadow: 0 24px 31px rgba(1,1,0,0.5);
   background-color: #e6e183;
 `
@@ -20,10 +24,32 @@ interface QuoteCardProps {
 function QuoteCard({ content, author }: QuoteCardProps) {
   return (
     <Div>
-      <div>
-        <div className="content">{content}</div>
-        <div className="author">{author}</div>
-      </div>
+      <Card
+        sx={{
+          padding: 5
+        }}>
+        <CardContent>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: 'fantasy'
+            }}>
+            {content}
+          </Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              textAlign: 'right',
+              margin: '5% 0 1% 0',
+              fontFamily: 'monospace',
+            }}>
+            {author}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={() => alert('TODO')}>SAVE TO LIBRARY</Button>
+        </CardActions>
+      </Card>
     </Div>
   )
 }

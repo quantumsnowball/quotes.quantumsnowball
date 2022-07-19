@@ -6,7 +6,6 @@ import Main from '../components/Main'
 const Div = styled.div`
   min-height: 100vh;
   min-width: 100vw;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: stretch;
