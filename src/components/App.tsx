@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Container from '@mui/material/Container'
 import '../styles/App.css'
 
 function App() {
@@ -18,7 +19,20 @@ function App() {
   useEffect(() => { fetchQuote() }, [])
 
   return (
-    <div className="App">
+    <Container
+      disableGutters={true}
+      sx={{
+        minHeight: '100vh',
+        minWidth: '100vw',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        backgroundColor: '#6c692a',
+        color: 'white',
+      }}
+    >
       <div className="card">
         <div className="header">
           <div className="content">{content}</div>
@@ -28,7 +42,7 @@ function App() {
           <button className="button" onClick={() => fetchQuote()}>Next Quote</button>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 
