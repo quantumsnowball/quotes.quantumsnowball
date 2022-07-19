@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import { getRandomFont } from '../../styles/fonts'
 
 
 const Div = styled.div`
@@ -32,7 +33,7 @@ function QuoteCard({ content, author }: QuoteCardProps) {
           <Typography
             variant="h4"
             sx={{
-              fontFamily: 'fantasy'
+              fontFamily: getRandomFont()
             }}>
             {content}
           </Typography>
@@ -41,7 +42,9 @@ function QuoteCard({ content, author }: QuoteCardProps) {
             sx={{
               textAlign: 'right',
               margin: '5% 0 1% 0',
-              fontFamily: 'monospace',
+              fontFamily: getRandomFont(),
+              fontStyle: 'italic',
+              fontWeight: 'bold'
             }}>
             {author}
           </Typography>
