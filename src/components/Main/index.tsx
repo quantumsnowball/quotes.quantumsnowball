@@ -29,9 +29,8 @@ function Main() {
       sx={{
         flexGrow: 1,
         textAlign: 'left',
-        overflow: 'auto'
+        overflow: 'auto',
       }}
-
     >
       {entries
         .map((entry: Entry, i: number) =>

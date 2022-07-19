@@ -14,7 +14,6 @@ const Div = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 24px 31px rgba(1,1,0,0.5);
-  background-color: #e6e183;
 `
 
 interface QuoteCardProps {
