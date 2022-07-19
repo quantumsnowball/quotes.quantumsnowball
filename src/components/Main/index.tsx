@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import QuoteCard from './QuoteCard'
+import NextButton from './NextButton'
 
 
 function Main() {
@@ -23,9 +24,7 @@ function Main() {
         content={content}
         author={author}
       />
-      <div className="footer">
-        <button className="button" onClick={() => fetchQuote()}>Next Quote</button>
-      </div>
+      <NextButton fetchQuote={fetchQuote} />
     </>
   )
 }

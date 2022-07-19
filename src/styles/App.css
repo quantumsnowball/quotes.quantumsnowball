@@ -11,24 +11,3 @@
   text-align: right;
   color: black;
 }
-
-.button {
-  margin: 5% 5% 10% 5%;
-  padding: 15px;
-  border-radius: 30px;
-  box-shadow: 0 10px 10px rgba(1,1,0,0.5);
-  font-size: 2rem;
-  background-color: #dc8a1f;
-  border-width: 0;
-}
-
-.button:hover,
-.button:focus {
-  opacity: 0.9;
-  outline: 0;
-}
-
-.button:active {
-  box-shadow: 0 5px 5px rgba(1,1,0,0.5);
-  margin-top: 6px;
-}
