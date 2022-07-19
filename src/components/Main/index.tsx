@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
+import Container from '@mui/material/Container'
 import { states } from '../App'
 import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
@@ -22,7 +23,16 @@ function Main() {
   useEffect(() => { fetchQuote() }, [])
 
   return (
-    <>
+    <Container
+      maxWidth={false}
+      disableGutters={true}
+      sx={{
+        flexGrow: 1,
+        textAlign: 'left',
+        overflow: 'auto'
+      }}
+
+    >
       {entries
         .map((entry: Entry, i: number) =>
           <QuoteCard
@@ -31,7 +41,7 @@ function Main() {
             author={entry.author}
           />)}
       <NextButton fetchQuote={fetchQuote} />
-    </>
+    </Container>
   )
 }
 
