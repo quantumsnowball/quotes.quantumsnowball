@@ -1,9 +1,8 @@
 import { createContext } from 'react'
 import '../styles/App.css'
-import { ThemeProvider } from '@mui/material'
+import { styled, ThemeProvider } from '@mui/material'
 import Container from '@mui/material/Container'
 import useColorTheme from '../hooks/useColorTheme'
-import styled from '@emotion/styled'
 import Main from '../components/Main'
 import useArray from '../hooks/useArray'
 import { States, Entry } from '../types'
@@ -15,6 +14,8 @@ const Div = styled(Container)`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
+  color: ${props => props.theme.palette.text.primary};
+  background-color: ${props => props.theme.palette.background.default};
 `
 
 export const states = createContext<States>({} as States)
@@ -32,11 +33,7 @@ function App() {
       entries: { entries, setEntries, pushEntry },
     }}>
       <ThemeProvider theme={theme}>
-        <Div
-          sx={{
-            color: 'text.primary',
-            backgroundColor: 'background.default',
-          }}>
+        <Div>
           <Main />
         </Div>
       </ThemeProvider>
