@@ -1,36 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/App.css';
+import { createContext, useEffect } from 'react'
+import { styled, ThemeProvider } from '@mui/material'
+import Container from '@mui/material/Container'
+import useColorTheme from '../hooks/useColorTheme'
+import Main from '../components/Main'
+import useArray from '../hooks/useArray'
+import { States, Entry } from '../types'
+
+
+// .app-ctn
+const FlexColumnDiv = styled('div')`
+  /* cover full viewport */
+  width: 100vw;
+  height: 100vh;
+  /* flex column display sections */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  /* theme */
+  color: ${props => props.theme.palette.text.primary};
+  background-color: ${props => props.theme.palette.background.default};
+`
+
+export const states = createContext<States>({} as States)
 
 function App() {
-  // hooks
-  const [content, setContent] = useState("")
-  const [author, setAuthor] = useState("")
+  const { mode, toggleMode, theme } = useColorTheme('dark')
+  const {
+    value: entries,
+    setValue: setEntries,
+    push: pushEntry
+  } = useArray<Entry>([])
 
-  // fetch
-  async function fetchQuote() {
-    const url = 'https://api.quotable.io/random'
-    const quote = await fetch(url).then(resp => resp.json())
-    setContent(quote.content)
-    setAuthor(quote.author)
-  }
-
-  // on mount
-  useEffect(() => { fetchQuote() }, [])
+  useEffect(() => {
+    document.body.style.backgroundColor = theme().palette.background.default
+  }, [mode])
 
   return (
-    <div className="App">
-      <div className="card">
-        <div className="header">
-          <div className="content">{content}</div>
-          <div className="author">{author}</div>
-        </div>
-        <div className="footer">
-          <button className="button" onClick={() => fetchQuote()}>Next Quote</button>
-        </div>
-      </div>
-    </div>
-  );
+    <states.Provider value={{
+      theme: { toggleMode },
+      entries: { entries, setEntries, pushEntry },
+    }}>
+      <ThemeProvider theme={theme}>
+        <FlexColumnDiv className="app-ctn">
+          <Main />
+        </FlexColumnDiv>
+      </ThemeProvider>
+    </states.Provider >
+  )
 }
 
-export default App;
+export default App
 

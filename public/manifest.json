@@ -1,8 +1,8 @@
 {
   "name": "Quantum Snowball - Quotes",
   "short_name": "Quotes",
-  "theme_color": "#6c692a",
-  "background_color": "#6c692a",
+  "theme_color": "#303030",
+  "background_color": "#303030",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
