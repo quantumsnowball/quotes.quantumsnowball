@@ -13,7 +13,7 @@ const FlexColumnDiv = styled(Container)`
   /* center itself in parent flex ctn */
   align-self: center;
   /* minimal margin between cards */
-  margin: 10px;
+  padding: 10px 0px;
   /* flex display card content, spread out content horizontal */
   display: flex;
   flex-flow: column nowrap;
