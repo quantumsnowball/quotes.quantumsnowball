@@ -1,14 +1,13 @@
 import { createContext } from 'react'
 import '../styles/App.css'
 import { styled, ThemeProvider } from '@mui/material'
-import Container from '@mui/material/Container'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import useArray from '../hooks/useArray'
 import { States, Entry } from '../types'
 
 
-const Div = styled(Container)`
+const FlexColumnDiv = styled('div')`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,9 +33,9 @@ function App() {
       entries: { entries, setEntries, pushEntry },
     }}>
       <ThemeProvider theme={theme}>
-        <Div>
+        <FlexColumnDiv>
           <Main />
-        </Div>
+        </FlexColumnDiv>
       </ThemeProvider>
     </states.Provider >
   )
