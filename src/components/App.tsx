@@ -4,7 +4,7 @@ import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
-import useArray from '../hooks/useArray'
+import { usePersistedArray } from '../hooks/useArray'
 import { States, Entry } from '../types'
 
 
@@ -31,7 +31,7 @@ function App() {
     value: entries,
     setValue: setEntries,
     push: pushEntry
-  } = useArray<Entry>([])
+  } = usePersistedArray<Entry>('entries', [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
