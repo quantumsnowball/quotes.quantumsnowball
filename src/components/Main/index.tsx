@@ -25,7 +25,9 @@ const ScrollableDiv = styled('div')`
 
 function Main() {
   const {
-    entries: { entries, pushEntry }
+    page: { page },
+    entries: { entries, pushEntry },
+    favorites: { favorites }
   } = useContext(states)
 
   async function fetchQuote() {
@@ -41,7 +43,7 @@ function Main() {
 
   return (
     <ScrollableDiv className='main-ctn'>
-      {entries
+      {(page === 'explorer' ? entries : favorites)
         .map((entry: Entry, i: number) =>
           <QuoteCard
             key={i}

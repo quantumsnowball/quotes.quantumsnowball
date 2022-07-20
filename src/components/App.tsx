@@ -1,11 +1,11 @@
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { styled, ThemeProvider } from '@mui/material'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
 import { usePersistedArray } from '../hooks/useArray'
-import { States, Entry } from '../types'
+import { States, Entry, Page } from '../types'
 
 
 // .app-ctn
@@ -27,6 +27,7 @@ export const states = createContext<States>({} as States)
 
 function App() {
   const { mode, toggleMode, theme } = useColorTheme('dark')
+  const [page, setPage] = useState<Page>('explorer')
   const {
     value: entries,
     setValue: setEntries,
@@ -45,6 +46,7 @@ function App() {
   return (
     <states.Provider value={{
       theme: { toggleMode },
+      page: { page, setPage },
       entries: { entries, setEntries, pushEntry },
       favorites: { favorites, setFavorites, pushFavorite },
     }}>

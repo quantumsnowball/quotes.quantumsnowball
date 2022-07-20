@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { states } from '../App'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import BottomNavigation from '@mui/material/BottomNavigation'
@@ -8,6 +9,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 
 
 function BottomNav() {
+  const {
+    page: { setPage }
+  } = useContext(states)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [value, setValue] = useState(0)
@@ -27,12 +31,12 @@ function BottomNav() {
       <BottomNavigationAction
         label="Explorer"
         icon={<ExploreIcon />}
-        onClick={() => alert('Explorer')}
+        onClick={() => setPage('explorer')}
       />
       <BottomNavigationAction
         label="Favorites"
         icon={<FavoriteIcon />}
-        onClick={() => alert('Favorites')}
+        onClick={() => setPage('favorites')}
       />
     </BottomNavigation>
   )
