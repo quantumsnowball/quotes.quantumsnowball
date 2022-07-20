@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import { getRandomFont } from '../../styles/fonts'
 
 
-const Div = styled.div`
+const FlexColumnDiv = styled.div`
   margin: 2%;
   flex-grow: 1;
   display: flex;
@@ -23,7 +23,7 @@ interface QuoteCardProps {
 
 function QuoteCard({ content, author }: QuoteCardProps) {
   return (
-    <Div>
+    <FlexColumnDiv>
       <Card
         sx={{
           padding: 5
@@ -52,7 +52,7 @@ function QuoteCard({ content, author }: QuoteCardProps) {
           <Button size="small" onClick={() => alert('TODO')}>SAVE TO LIBRARY</Button>
         </CardActions>
       </Card>
-    </Div>
+    </FlexColumnDiv>
   )
 }
 
