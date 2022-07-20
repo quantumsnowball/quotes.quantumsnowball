@@ -4,6 +4,7 @@ import { states } from '../App'
 import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
 import { Entry } from '../../types'
+import ToggleThemeButton from './ToggleThemeButton'
 
 
 function Main() {
@@ -40,6 +41,7 @@ function Main() {
             author={entry.author}
           />)}
       <NextButton fetchQuote={fetchQuote} />
+      <ToggleThemeButton />
     </Container>
   )
 }

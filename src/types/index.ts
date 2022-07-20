@@ -6,6 +6,9 @@ export interface Entry {
 export type ColorMode = 'light' | 'dark'
 
 export interface States {
+  theme: {
+    toggleMode: () => void
+  },
   entries: {
     entries: Entry[],
     setEntries: React.Dispatch<React.SetStateAction<Entry[]>>,

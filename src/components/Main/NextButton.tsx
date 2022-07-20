@@ -16,15 +16,12 @@ function NextButton({ fetchQuote }: NextButtonProps) {
       transform: "translateX(-50%)"
     }}>
       <Fab
-        variant="extended"
         color="primary"
         aria-label="add"
         // size="large"
         onClick={() => fetchQuote()}
       >
-        <AddIcon sx={{ mr: 1 }} />
-        Next Quote
-        <AddIcon sx={{ mr: 1 }} />
+        <AddIcon />
       </Fab>
     </Box>
   )

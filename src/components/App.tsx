@@ -30,6 +30,7 @@ function App() {
 
   return (
     <states.Provider value={{
+      theme: { toggleMode },
       entries: { entries, setEntries, pushEntry },
     }}>
       <ThemeProvider theme={theme}>
