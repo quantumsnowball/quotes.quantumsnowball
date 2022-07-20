@@ -1,17 +1,23 @@
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { styled, ThemeProvider } from '@mui/material'
+import Container from '@mui/material/Container'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import useArray from '../hooks/useArray'
 import { States, Entry } from '../types'
 
 
+// .app-ctn
 const FlexColumnDiv = styled('div')`
+  /* cover full viewport */
+  width: 100vw;
   height: 100vh;
+  /* flex column display sections */
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   align-items: stretch;
-  justify-content: center;
+  /* theme */
   color: ${props => props.theme.palette.text.primary};
   background-color: ${props => props.theme.palette.background.default};
 `
@@ -19,12 +25,16 @@ const FlexColumnDiv = styled('div')`
 export const states = createContext<States>({} as States)
 
 function App() {
-  const { toggleMode, theme } = useColorTheme('dark')
+  const { mode, toggleMode, theme } = useColorTheme('dark')
   const {
     value: entries,
     setValue: setEntries,
     push: pushEntry
   } = useArray<Entry>([])
+
+  useEffect(() => {
+    document.body.style.backgroundColor = theme().palette.background.default
+  }, [mode])
 
   return (
     <states.Provider value={{
@@ -32,7 +42,7 @@ function App() {
       entries: { entries, setEntries, pushEntry },
     }}>
       <ThemeProvider theme={theme}>
-        <FlexColumnDiv>
+        <FlexColumnDiv className="app-ctn">
           <Main />
         </FlexColumnDiv>
       </ThemeProvider>

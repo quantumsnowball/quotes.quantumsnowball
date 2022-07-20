@@ -8,10 +8,20 @@ import ToggleThemeButton from './ToggleThemeButton'
 import { getRandomFont } from '../../styles/fonts'
 
 
+// .main-ctn
 const ScrollableDiv = styled('div')`
+  /* take all flex space from parents */
   flex-grow: 1;
-  text-align: left;
+  /* flex column display all quote cards */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-item: stretch;
+  align-content: center;
+  /* allow scrollbar here*/
   overflow: auto;
+  /* text */
+  text-align: left;
 `
 
 function Main() {
@@ -31,7 +41,7 @@ function Main() {
   useEffect(() => { fetchQuote() }, [])
 
   return (
-    <ScrollableDiv>
+    <ScrollableDiv className='main-ctn'>
       {entries
         .map((entry: Entry, i: number) =>
           <QuoteCard

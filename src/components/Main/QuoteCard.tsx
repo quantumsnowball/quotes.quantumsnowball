@@ -1,4 +1,5 @@
-import styled from '@emotion/styled'
+import { styled } from '@mui/material'
+import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -7,13 +8,16 @@ import Button from '@mui/material/Button'
 import { StyledText } from '../../types'
 
 
-const FlexColumnDiv = styled.div`
-  margin: 2%;
-  flex-grow: 1;
+// .quotecard-ctn
+const FlexColumnDiv = styled(Container)`
+  /* center itself in parent flex ctn */
+  align-self: center;
+  /* minimal margin between cards */
+  margin: 10px;
+  /* flex display card content, spread out content horizontal */
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: space-between;
-  box-shadow: 0 24px 31px rgba(1,1,0,0.5);
 `
 
 interface QuoteCardProps {
@@ -23,7 +27,7 @@ interface QuoteCardProps {
 
 function QuoteCard({ content, author }: QuoteCardProps) {
   return (
-    <FlexColumnDiv>
+    <FlexColumnDiv className='quotecard-ctn'>
       <Card
         sx={{
           padding: 5
