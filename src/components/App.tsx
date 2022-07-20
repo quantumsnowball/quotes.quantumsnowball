@@ -1,8 +1,8 @@
 import { createContext, useEffect } from 'react'
 import { styled, ThemeProvider } from '@mui/material'
-import Container from '@mui/material/Container'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
+import MenuBar from '../components/MenuBar'
 import useArray from '../hooks/useArray'
 import { States, Entry } from '../types'
 
@@ -43,6 +43,7 @@ function App() {
     }}>
       <ThemeProvider theme={theme}>
         <FlexColumnDiv className="app-ctn">
+          <MenuBar />
           <Main />
         </FlexColumnDiv>
       </ThemeProvider>
