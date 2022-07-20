@@ -1,11 +1,17 @@
 import { useEffect, useContext } from 'react'
-import Container from '@mui/material/Container'
+import { styled } from '@mui/material'
 import { states } from '../App'
 import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
 import { Entry } from '../../types'
 import ToggleThemeButton from './ToggleThemeButton'
 
+
+const ScrollableDiv = styled('div')`
+  flex-grow: 1;
+  text-align: left;
+  overflow: auto;
+`
 
 function Main() {
   const {
@@ -20,19 +26,11 @@ function Main() {
       author: quote.author,
     })
   }
-  // on mount
+
   useEffect(() => { fetchQuote() }, [])
 
   return (
-    <Container
-      maxWidth={false}
-      disableGutters={true}
-      sx={{
-        flexGrow: 1,
-        textAlign: 'left',
-        overflow: 'auto',
-      }}
-    >
+    <ScrollableDiv>
       {entries
         .map((entry: Entry, i: number) =>
           <QuoteCard
@@ -42,7 +40,7 @@ function Main() {
           />)}
       <NextButton fetchQuote={fetchQuote} />
       <ToggleThemeButton />
-    </Container>
+    </ScrollableDiv>
   )
 }
 
