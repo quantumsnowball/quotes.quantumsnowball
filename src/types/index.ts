@@ -1,6 +1,11 @@
+export interface StyledText {
+  text: string,
+  font: string
+}
+
 export interface Entry {
-  content: string,
-  author: string
+  content: StyledText,
+  author: StyledText
 }
 
 export type ColorMode = 'light' | 'dark'

@@ -5,6 +5,7 @@ import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
 import { Entry } from '../../types'
 import ToggleThemeButton from './ToggleThemeButton'
+import { getRandomFont } from '../../styles/fonts'
 
 
 const ScrollableDiv = styled('div')`
@@ -22,8 +23,8 @@ function Main() {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
     pushEntry({
-      content: quote.content,
-      author: quote.author,
+      content: { text: quote.content, font: getRandomFont() },
+      author: { text: quote.author, font: getRandomFont() },
     })
   }
 

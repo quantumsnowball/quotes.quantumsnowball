@@ -4,7 +4,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { getRandomFont } from '../../styles/fonts'
+import { StyledText } from '../../types'
 
 
 const FlexColumnDiv = styled.div`
@@ -17,8 +17,8 @@ const FlexColumnDiv = styled.div`
 `
 
 interface QuoteCardProps {
-  content: string,
-  author: string,
+  content: StyledText,
+  author: StyledText,
 }
 
 function QuoteCard({ content, author }: QuoteCardProps) {
@@ -32,20 +32,20 @@ function QuoteCard({ content, author }: QuoteCardProps) {
           <Typography
             variant="h4"
             sx={{
-              fontFamily: getRandomFont()
+              fontFamily: content.font
             }}>
-            {content}
+            {content.text}
           </Typography>
           <Typography
             variant="h4"
             sx={{
               textAlign: 'right',
               margin: '5% 0 1% 0',
-              fontFamily: getRandomFont(),
+              fontFamily: author.font,
               fontStyle: 'italic',
               fontWeight: 'bold'
             }}>
-            {author}
+            {author.text}
           </Typography>
         </CardContent>
         <CardActions>
