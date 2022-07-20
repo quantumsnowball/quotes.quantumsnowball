@@ -32,6 +32,11 @@ function App() {
     setValue: setEntries,
     push: pushEntry
   } = usePersistedArray<Entry>('entries', [])
+  const {
+    value: favorites,
+    setValue: setFavorites,
+    push: pushFavorite
+  } = usePersistedArray<Entry>('favorites', [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
@@ -41,6 +46,7 @@ function App() {
     <states.Provider value={{
       theme: { toggleMode },
       entries: { entries, setEntries, pushEntry },
+      favorites: { favorites, setFavorites, pushFavorite },
     }}>
       <ThemeProvider theme={theme}>
         <FlexColumnDiv className="app-ctn">

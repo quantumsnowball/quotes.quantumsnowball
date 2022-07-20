@@ -24,8 +24,16 @@ function BottomNav() {
         alignSelf: isMobile ? "stretch" : "center"
       }}
     >
-      <BottomNavigationAction label="Explorer" icon={<ExploreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+      <BottomNavigationAction
+        label="Explorer"
+        icon={<ExploreIcon />}
+        onClick={() => alert('Explorer')}
+      />
+      <BottomNavigationAction
+        label="Favorites"
+        icon={<FavoriteIcon />}
+        onClick={() => alert('Favorites')}
+      />
     </BottomNavigation>
   )
 }
