@@ -33,7 +33,8 @@ function QuoteCard({ content, author }: QuoteCardProps) {
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
         sx={{
-          padding: isMobile ? 2 : 4
+          padding: isMobile ? 2 : 4,
+          userSelect: 'none'
         }}>
         <CardContent>
           <Typography
