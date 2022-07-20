@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import AddIcon from '@mui/icons-material/Add'
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 
 interface NextButtonProps {
@@ -12,15 +12,17 @@ function NextButton({ fetchQuote }: NextButtonProps) {
     <Box sx={{
       position: 'fixed',
       bottom: 50,
-      right: 50
+      left: '50%',
+      transform: "translateX(-50%)"
     }}>
       <Fab
+        variant="extended"
         color="primary"
-        aria-label="add"
-        // size="large"
+        aria-label="new"
         onClick={() => fetchQuote()}
       >
-        <AddIcon />
+        <GetAppIcon />
+        Get New Quote
       </Fab>
     </Box>
   )

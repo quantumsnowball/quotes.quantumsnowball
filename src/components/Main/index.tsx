@@ -4,7 +4,6 @@ import { states } from '../App'
 import QuoteCard from './QuoteCard'
 import NextButton from './NextButton'
 import { Entry } from '../../types'
-import ToggleThemeButton from './ToggleThemeButton'
 import { getRandomFont } from '../../styles/fonts'
 
 
@@ -50,7 +49,6 @@ function Main() {
             author={entry.author}
           />)}
       <NextButton fetchQuote={fetchQuote} />
-      <ToggleThemeButton />
     </ScrollableDiv>
   )
 }
