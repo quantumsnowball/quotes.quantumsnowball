@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import GetAppIcon from '@mui/icons-material/GetApp';
+import GetAppIcon from '@mui/icons-material/GetApp'
 
 
 interface NextButtonProps {
@@ -10,8 +10,8 @@ interface NextButtonProps {
 function NextButton({ fetchQuote }: NextButtonProps) {
   return (
     <Box sx={{
-      position: 'fixed',
-      bottom: 50,
+      position: 'absolute',
+      bottom: 100,
       left: '50%',
       transform: "translateX(-50%)"
     }}>

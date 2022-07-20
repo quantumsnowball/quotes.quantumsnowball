@@ -3,6 +3,7 @@ import { styled, ThemeProvider } from '@mui/material'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
+import BottomNav from '../components/BottomNav'
 import useArray from '../hooks/useArray'
 import { States, Entry } from '../types'
 
@@ -45,6 +46,7 @@ function App() {
         <FlexColumnDiv className="app-ctn">
           <MenuBar />
           <Main />
+          <BottomNav />
         </FlexColumnDiv>
       </ThemeProvider>
     </states.Provider >
