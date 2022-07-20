@@ -3,10 +3,8 @@ import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import { StyledText } from '../../types'
 
 
@@ -58,9 +56,6 @@ function QuoteCard({ content, author }: QuoteCardProps) {
             {author.text}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => alert('TODO')}>SAVE TO LIBRARY</Button>
-        </CardActions>
       </Card>
     </FlexColumnDiv>
   )
