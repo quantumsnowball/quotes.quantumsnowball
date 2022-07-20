@@ -1,10 +1,15 @@
+import { useContext } from 'react'
+import { states } from '../App'
 import { styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { StyledText } from '../../types'
 
 
@@ -26,6 +31,9 @@ interface QuoteCardProps {
 }
 
 function QuoteCard({ content, author }: QuoteCardProps) {
+  const {
+    favorites: { pushFavorite }
+  } = useContext(states)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -57,6 +65,12 @@ function QuoteCard({ content, author }: QuoteCardProps) {
             {author.text}
           </Typography>
         </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites"
+            onClick={() => pushFavorite({ content, author })}>
+            <FavoriteIcon />
+          </IconButton>
+        </CardActions>
       </Card>
     </FlexColumnDiv>
   )
