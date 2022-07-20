@@ -1,5 +1,4 @@
 import { createContext } from 'react'
-import '../styles/App.css'
 import { styled, ThemeProvider } from '@mui/material'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
