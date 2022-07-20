@@ -11,9 +11,8 @@ function NextButton({ fetchQuote }: NextButtonProps) {
   return (
     <Box sx={{
       position: 'fixed',
-      bottom: '15%',
-      left: '50%',
-      transform: "translateX(-50%)"
+      bottom: 50,
+      right: 50
     }}>
       <Fab
         color="primary"
