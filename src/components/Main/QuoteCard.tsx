@@ -1,4 +1,6 @@
 import { styled } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -26,25 +28,29 @@ interface QuoteCardProps {
 }
 
 function QuoteCard({ content, author }: QuoteCardProps) {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
         sx={{
-          padding: 5
+          padding: isMobile ? 2 : 4
         }}>
         <CardContent>
           <Typography
-            variant="h4"
+            variant={isMobile ? "h6" : "h5"}
             sx={{
               fontFamily: content.font
             }}>
             {content.text}
           </Typography>
           <Typography
-            variant="h4"
+            variant={isMobile ? "h6" : "h4"}
             sx={{
               textAlign: 'right',
-              margin: '5% 0 1% 0',
+              marginTop: isMobile ? "2%" : "5%",
+              marginBottom: '1%',
               fontFamily: author.font,
               fontStyle: 'italic',
               fontWeight: 'bold'
