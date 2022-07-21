@@ -41,15 +41,16 @@ function Main() {
 
   useEffect(() => { fetchQuote() }, [])
 
+  const pages = {
+    explorer: entries.map((entry: Entry, i: number) =>
+      <ExplorerQuoteCard key={i} id={i} content={entry.content} author={entry.author} />),
+    favorites: favorites.map((entry: Entry, i: number) =>
+      <FavoritesQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
+  }
+
   return (
     <ScrollableDiv className='main-ctn'>
-      {page === 'explorer' ?
-        entries.map((entry: Entry, i: number) =>
-          <ExplorerQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
-        :
-        favorites.map((entry: Entry, i: number) =>
-          <FavoritesQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
-      }
+      {pages[page]}
       <NextButton fetchQuote={fetchQuote} />
     </ScrollableDiv>
   )
