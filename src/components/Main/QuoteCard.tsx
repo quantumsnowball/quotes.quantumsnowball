@@ -93,10 +93,13 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="secondary"
         aria-label="add to favorites"
-        onClick={() => pushFavorite({ content: props.content, author: props.author })}>
+        onClick={() => {
+          pushFavorite({ content: props.content, author: props.author })
+          removeEntry(props.id)
+        }}>
         <FavoriteIcon />
       </IconButton>
-      <Box sx={{flexGrow: 1}}/>
+      <Box sx={{ flexGrow: 1 }} />
       <IconButton
         color="error"
         aria-label="delete from explorer"
@@ -115,7 +118,7 @@ export function FavoritesQuoteCard(props: CardContentProps) {
 
   const cardActions =
     <CardActions disableSpacing>
-      <Box sx={{flexGrow: 1}}/>
+      <Box sx={{ flexGrow: 1 }} />
       <IconButton
         color="error"
         aria-label="delete from favorites"
