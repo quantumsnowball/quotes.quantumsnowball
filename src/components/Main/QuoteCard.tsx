@@ -28,10 +28,6 @@ const FlexColumnDiv = styled(Container)`
   justify-content: space-between;
 `
 
-interface CardContentProps extends Entry {
-  index: number,
-}
-
 interface QuoteCardProps extends CardContentProps {
   cardActions: JSX.Element
 }
@@ -79,6 +75,9 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
   )
 }
 
+export interface CardContentProps extends Entry {
+  index: number,
+}
 
 export function ExplorerQuoteCard(props: CardContentProps) {
   const { index, ...entry } = props

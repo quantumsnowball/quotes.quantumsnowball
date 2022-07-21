@@ -1,10 +1,24 @@
 import { useContext } from 'react'
 import { styled } from '@mui/material'
 import { states } from '../App'
-import { ExplorerQuoteCard, FavoritesQuoteCard } from './QuoteCard'
+import { ExplorerQuoteCard, FavoritesQuoteCard, CardContentProps } from './QuoteCard'
 import { Entry } from '../../types'
 import { Routes, Route } from 'react-router-dom'
 
+
+interface Page {
+  items: Entry[],
+  Card: (props: CardContentProps) => JSX.Element
+}
+
+function Page({ items, Card }: Page) {
+  return (
+    <>
+      {items.map((entry: Entry, i: number) =>
+        <Card key={entry.uuidv4} index={i} {...entry} />)}
+    </>
+  )
+}
 
 // .main-ctn
 const ScrollableDiv = styled('div')`
@@ -28,25 +42,16 @@ function Main() {
     favorites: { favorites }
   } = useContext(states)
 
-  const Explorer = () =>
-    <>
-      {entries.map((entry: Entry, i: number) =>
-        <ExplorerQuoteCard key={entry.uuidv4} index={i} {...entry} />)}
-    </>
-
-  const Favorites = () =>
-    <>
-      {favorites.map((entry: Entry, i: number) =>
-        <FavoritesQuoteCard key={entry.uuidv4} index={i} {...entry} />)}
-    </>
+  const explorerPage = <Page items={entries} Card={ExplorerQuoteCard} />
+  const favoritesPage = <Page items={favorites} Card={FavoritesQuoteCard} />
 
   return (
     <>
       <ScrollableDiv className='main-ctn'>
         <Routes>
-          <Route path="/" element={<Explorer />} />
-          <Route path="/explorer" element={<Explorer />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/" element={explorerPage} />
+          <Route path="/explorer" element={explorerPage} />
+          <Route path="/favorites" element={favoritesPage} />
         </Routes>
       </ScrollableDiv>
     </>
