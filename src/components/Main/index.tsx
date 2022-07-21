@@ -49,10 +49,12 @@ function Main() {
   }
 
   return (
-    <ScrollableDiv className='main-ctn'>
-      {pages[page]}
+    <>
+      <ScrollableDiv className='main-ctn'>
+        {pages[page]}
+      </ScrollableDiv>
       <NextButton fetchQuote={fetchQuote} />
-    </ScrollableDiv>
+    </>
   )
 }
 
