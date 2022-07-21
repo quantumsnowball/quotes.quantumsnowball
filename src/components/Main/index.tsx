@@ -3,6 +3,7 @@ import { styled } from '@mui/material'
 import { states } from '../App'
 import { ExplorerQuoteCard, FavoritesQuoteCard } from './QuoteCard'
 import { Entry } from '../../types'
+import { Routes, Route } from 'react-router-dom'
 
 
 // .main-ctn
@@ -23,23 +24,30 @@ const ScrollableDiv = styled('div')`
 
 function Main() {
   const {
-    page: { page },
-    entries: { entries, pushEntry },
+    entries: { entries },
     favorites: { favorites }
   } = useContext(states)
 
+  const Explorer = () =>
+    <>
+      {entries.map((entry: Entry, i: number) =>
+        <ExplorerQuoteCard key={entry.uuidv4} index={i} {...entry} />)}
+    </>
 
-  const pages = {
-    explorer: entries.map((entry: Entry, i: number) =>
-      <ExplorerQuoteCard key={entry.uuidv4} index={i} {...entry} />),
-    favorites: favorites.map((entry: Entry, i: number) =>
-      <FavoritesQuoteCard key={entry.uuidv4} index={i} {...entry} />)
-  }
+  const Favorites = () =>
+    <>
+      {favorites.map((entry: Entry, i: number) =>
+        <FavoritesQuoteCard key={entry.uuidv4} index={i} {...entry} />)}
+    </>
 
   return (
     <>
       <ScrollableDiv className='main-ctn'>
-        {pages[page]}
+        <Routes>
+          <Route path="/" element={<Explorer />} />
+          <Route path="/explorer" element={<Explorer />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
       </ScrollableDiv>
     </>
   )
