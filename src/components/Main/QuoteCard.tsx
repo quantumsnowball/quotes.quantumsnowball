@@ -3,6 +3,7 @@ import { states } from '../App'
 import { styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -95,6 +96,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         onClick={() => pushFavorite({ content: props.content, author: props.author })}>
         <FavoriteIcon />
       </IconButton>
+      <Box sx={{flexGrow: 1}}/>
       <IconButton
         color="error"
         aria-label="delete from explorer"
@@ -113,6 +115,7 @@ export function FavoritesQuoteCard(props: CardContentProps) {
 
   const cardActions =
     <CardActions disableSpacing>
+      <Box sx={{flexGrow: 1}}/>
       <IconButton
         color="error"
         aria-label="delete from favorites"
