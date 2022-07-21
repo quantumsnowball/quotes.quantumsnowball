@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { StyledText } from '../../types'
+import { useBoolean } from '../../hooks/useBoolean'
 
 
 // .quotecard-ctn
@@ -36,10 +37,15 @@ function QuoteCard({ content, author }: QuoteCardProps) {
   } = useContext(states)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const {
+    value: expanded,
+    toggleValue: toggleExpanded
+  } = useBoolean(false)
 
   return (
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
+        onClick={() => toggleExpanded()}
         sx={{
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
@@ -65,12 +71,14 @@ function QuoteCard({ content, author }: QuoteCardProps) {
             {author.text}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites"
-            onClick={() => pushFavorite({ content, author })}>
-            <FavoriteIcon />
-          </IconButton>
-        </CardActions>
+        {expanded ?
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites"
+              onClick={() => pushFavorite({ content, author })}>
+              <FavoriteIcon />
+            </IconButton>
+          </CardActions>
+          : null}
       </Card>
     </FlexColumnDiv>
   )
