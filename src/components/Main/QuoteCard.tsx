@@ -48,12 +48,12 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
   return (
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
-        onClick={() => toggleExpanded()}
         sx={{
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
-        <CardContent>
+        <CardContent
+          onClick={() => toggleExpanded()}>
           <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
@@ -83,14 +83,23 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
 
 export function ExplorerQuoteCard(props: CardContentProps) {
   const {
+    entries: { removeEntry },
     favorites: { pushFavorite }
   } = useContext(states)
 
   const cardActions =
     <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites"
+      <IconButton
+        color="secondary"
+        aria-label="add to favorites"
         onClick={() => pushFavorite({ content: props.content, author: props.author })}>
         <FavoriteIcon />
+      </IconButton>
+      <IconButton
+        color="error"
+        aria-label="delete from explorer"
+        onClick={() => removeEntry(props.id)}>
+        <DeleteIcon />
       </IconButton>
     </CardActions>
 
@@ -104,7 +113,9 @@ export function FavoritesQuoteCard(props: CardContentProps) {
 
   const cardActions =
     <CardActions disableSpacing>
-      <IconButton aria-label="delete from favorites"
+      <IconButton
+        color="error"
+        aria-label="delete from favorites"
         onClick={() => removeFavorite(props.id)}>
         <DeleteIcon />
       </IconButton>

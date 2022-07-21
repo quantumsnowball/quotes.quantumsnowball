@@ -24,6 +24,7 @@ export interface States {
     entries: Entry[],
     setEntries: React.Dispatch<React.SetStateAction<Entry[]>>,
     pushEntry: (element: Entry) => void
+    removeEntry: (index: number) => void
   },
   favorites: {
     favorites: Entry[],

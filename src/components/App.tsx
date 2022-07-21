@@ -31,7 +31,8 @@ function App() {
   const {
     value: entries,
     setValue: setEntries,
-    push: pushEntry
+    push: pushEntry,
+    remove: removeEntry
   } = usePersistedArray<Entry>('entries', [])
   const {
     value: favorites,
@@ -48,7 +49,7 @@ function App() {
     <states.Provider value={{
       theme: { toggleMode },
       page: { page, setPage },
-      entries: { entries, setEntries, pushEntry },
+      entries: { entries, setEntries, pushEntry, removeEntry },
       favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>
       <ThemeProvider theme={theme}>
