@@ -1,4 +1,5 @@
 import { useEffect, useContext } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { styled } from '@mui/material'
 import { states } from '../App'
 import { ExplorerQuoteCard, FavoritesQuoteCard } from './QuoteCard'
@@ -34,6 +35,7 @@ function Main() {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
     pushEntry({
+      uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
     })
@@ -43,9 +45,9 @@ function Main() {
 
   const pages = {
     explorer: entries.map((entry: Entry, i: number) =>
-      <ExplorerQuoteCard key={i} id={i} content={entry.content} author={entry.author} />),
+      <ExplorerQuoteCard key={entry.uuidv4} index={i} {...entry} />),
     favorites: favorites.map((entry: Entry, i: number) =>
-      <FavoritesQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
+      <FavoritesQuoteCard key={entry.uuidv4} index={i} {...entry} />)
   }
 
   return (

@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { StyledText } from '../../types'
+import { Entry } from '../../types'
 import { useBoolean } from '../../hooks/useBoolean'
 
 
@@ -28,10 +28,8 @@ const FlexColumnDiv = styled(Container)`
   justify-content: space-between;
 `
 
-interface CardContentProps {
-  id: number,
-  content: StyledText,
-  author: StyledText,
+interface CardContentProps extends Entry {
+  index: number,
 }
 
 interface QuoteCardProps extends CardContentProps {
@@ -83,6 +81,7 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
 
 
 export function ExplorerQuoteCard(props: CardContentProps) {
+  const { index, ...entry } = props
   const {
     entries: { removeEntry },
     favorites: { pushFavorite }
@@ -94,8 +93,8 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         color="secondary"
         aria-label="add to favorites"
         onClick={() => {
-          pushFavorite({ content: props.content, author: props.author })
-          removeEntry(props.id)
+          pushFavorite(entry)
+          removeEntry(index)
         }}>
         <FavoriteIcon />
       </IconButton>
@@ -103,7 +102,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from explorer"
-        onClick={() => removeEntry(props.id)}>
+        onClick={() => removeEntry(index)}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
@@ -122,7 +121,7 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from favorites"
-        onClick={() => removeFavorite(props.id)}>
+        onClick={() => removeFavorite(props.index)}>
         <DeleteIcon />
       </IconButton>
     </CardActions>

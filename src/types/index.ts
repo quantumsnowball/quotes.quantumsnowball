@@ -4,6 +4,7 @@ export interface StyledText {
 }
 
 export interface Entry {
+  uuidv4: string,
   content: StyledText,
   author: StyledText
 }
