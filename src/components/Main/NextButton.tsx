@@ -1,6 +1,8 @@
+import { useContext } from 'react'
+import { states } from '../App'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import AddIcon from '@mui/icons-material/Add'
+import GetAppIcon from '@mui/icons-material/GetApp'
 
 
 interface NextButtonProps {
@@ -8,19 +10,26 @@ interface NextButtonProps {
 }
 
 function NextButton({ fetchQuote }: NextButtonProps) {
+  const {
+    page: { page }
+  } = useContext(states)
+
   return (
     <Box sx={{
-      position: 'fixed',
-      bottom: 50,
-      right: 50
+      display: page === 'favorites' ? 'none' : 'inherit',
+      position: 'absolute',
+      bottom: 100,
+      left: '50%',
+      transform: "translateX(-50%)"
     }}>
       <Fab
+        variant="extended"
         color="primary"
-        aria-label="add"
-        // size="large"
+        aria-label="new"
         onClick={() => fetchQuote()}
       >
-        <AddIcon />
+        <GetAppIcon />
+        Get New Quote
       </Fab>
     </Box>
   )

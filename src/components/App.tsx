@@ -1,10 +1,11 @@
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { styled, ThemeProvider } from '@mui/material'
-import Container from '@mui/material/Container'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
-import useArray from '../hooks/useArray'
-import { States, Entry } from '../types'
+import MenuBar from '../components/MenuBar'
+import BottomNav from '../components/BottomNav'
+import { usePersistedArray } from '../hooks/useArray'
+import { States, Entry, Page } from '../types'
 
 
 // .app-ctn
@@ -26,11 +27,19 @@ export const states = createContext<States>({} as States)
 
 function App() {
   const { mode, toggleMode, theme } = useColorTheme('dark')
+  const [page, setPage] = useState<Page>('explorer')
   const {
     value: entries,
     setValue: setEntries,
-    push: pushEntry
-  } = useArray<Entry>([])
+    push: pushEntry,
+    remove: removeEntry
+  } = usePersistedArray<Entry>('entries', [])
+  const {
+    value: favorites,
+    setValue: setFavorites,
+    push: pushFavorite,
+    remove: removeFavorite
+  } = usePersistedArray<Entry>('favorites', [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
@@ -39,11 +48,15 @@ function App() {
   return (
     <states.Provider value={{
       theme: { toggleMode },
-      entries: { entries, setEntries, pushEntry },
+      page: { page, setPage },
+      entries: { entries, setEntries, pushEntry, removeEntry },
+      favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>
       <ThemeProvider theme={theme}>
         <FlexColumnDiv className="app-ctn">
+          <MenuBar />
           <Main />
+          <BottomNav />
         </FlexColumnDiv>
       </ThemeProvider>
     </states.Provider >
