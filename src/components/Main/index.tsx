@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { styled } from '@mui/material'
 import { states } from '../App'
-import QuoteCard from './QuoteCard'
+import { ExplorerQuoteCard, FavoritesQuoteCard } from './QuoteCard'
 import NextButton from './NextButton'
 import { Entry } from '../../types'
 import { getRandomFont } from '../../styles/fonts'
@@ -43,13 +43,13 @@ function Main() {
 
   return (
     <ScrollableDiv className='main-ctn'>
-      {(page === 'explorer' ? entries : favorites)
-        .map((entry: Entry, i: number) =>
-          <QuoteCard
-            key={i}
-            content={entry.content}
-            author={entry.author}
-          />)}
+      {page === 'explorer' ?
+        entries.map((entry: Entry, i: number) =>
+          <ExplorerQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
+        :
+        favorites.map((entry: Entry, i: number) =>
+          <FavoritesQuoteCard key={i} id={i} content={entry.content} author={entry.author} />)
+      }
       <NextButton fetchQuote={fetchQuote} />
     </ScrollableDiv>
   )

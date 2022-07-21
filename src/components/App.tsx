@@ -36,7 +36,8 @@ function App() {
   const {
     value: favorites,
     setValue: setFavorites,
-    push: pushFavorite
+    push: pushFavorite,
+    remove: removeFavorite
   } = usePersistedArray<Entry>('favorites', [])
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
       theme: { toggleMode },
       page: { page, setPage },
       entries: { entries, setEntries, pushEntry },
-      favorites: { favorites, setFavorites, pushFavorite },
+      favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>
       <ThemeProvider theme={theme}>
         <FlexColumnDiv className="app-ctn">

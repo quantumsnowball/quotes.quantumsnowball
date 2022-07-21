@@ -10,6 +10,7 @@ import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { StyledText } from '../../types'
 import { useBoolean } from '../../hooks/useBoolean'
 
@@ -26,15 +27,17 @@ const FlexColumnDiv = styled(Container)`
   justify-content: space-between;
 `
 
-interface QuoteCardProps {
+interface CardContentProps {
+  id: number,
   content: StyledText,
   author: StyledText,
 }
 
-function QuoteCard({ content, author }: QuoteCardProps) {
-  const {
-    favorites: { pushFavorite }
-  } = useContext(states)
+interface QuoteCardProps extends CardContentProps {
+  cardActions: JSX.Element
+}
+
+function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const {
@@ -71,17 +74,41 @@ function QuoteCard({ content, author }: QuoteCardProps) {
             {author.text}
           </Typography>
         </CardContent>
-        {expanded ?
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites"
-              onClick={() => pushFavorite({ content, author })}>
-              <FavoriteIcon />
-            </IconButton>
-          </CardActions>
-          : null}
+        {expanded ? cardActions : null}
       </Card>
     </FlexColumnDiv>
   )
 }
 
-export default QuoteCard
+
+export function ExplorerQuoteCard(props: CardContentProps) {
+  const {
+    favorites: { pushFavorite }
+  } = useContext(states)
+
+  const cardActions =
+    <CardActions disableSpacing>
+      <IconButton aria-label="add to favorites"
+        onClick={() => pushFavorite({ content: props.content, author: props.author })}>
+        <FavoriteIcon />
+      </IconButton>
+    </CardActions>
+
+  return <QuoteCard {...{ ...props, cardActions }} />
+}
+
+export function FavoritesQuoteCard(props: CardContentProps) {
+  const {
+    favorites: { removeFavorite }
+  } = useContext(states)
+
+  const cardActions =
+    <CardActions disableSpacing>
+      <IconButton aria-label="delete from favorites"
+        onClick={() => removeFavorite(props.id)}>
+        <DeleteIcon />
+      </IconButton>
+    </CardActions>
+
+  return <QuoteCard {...{ ...props, cardActions }} />
+}

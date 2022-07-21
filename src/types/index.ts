@@ -29,5 +29,6 @@ export interface States {
     favorites: Entry[],
     setFavorites: React.Dispatch<React.SetStateAction<Entry[]>>,
     pushFavorite: (element: Entry) => void
+    removeFavorite: (index: number) => void
   }
 }
