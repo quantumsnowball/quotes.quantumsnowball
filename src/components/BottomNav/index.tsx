@@ -9,6 +9,7 @@ import ExploreIcon from '@mui/icons-material/Explore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import NextButton from './NextButton'
 import { getRandomFont } from '../../styles/fonts'
+import { Link } from 'react-router-dom'
 
 
 function BottomNav() {
@@ -46,11 +47,15 @@ function BottomNav() {
         }}
       >
         <BottomNavigationAction
+          component={Link}
+          to="/explorer"
           label="Explorer"
           icon={<ExploreIcon />}
           onClick={() => setPage('explorer')}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/favorites"
           label="Favorites"
           icon={<FavoriteIcon />}
           onClick={() => setPage('favorites')}
