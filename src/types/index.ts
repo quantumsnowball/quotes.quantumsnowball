@@ -14,9 +14,6 @@ export type ColorMode = 'light' | 'dark'
 export type Page = 'explorer' | 'favorites'
 
 export interface States {
-  theme: {
-    toggleMode: () => void
-  },
   page: {
     page: Page,
     setPage: React.Dispatch<React.SetStateAction<Page>>

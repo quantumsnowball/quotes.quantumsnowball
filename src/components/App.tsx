@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from 'react'
-import { styled, ThemeProvider } from '@mui/material'
+import { createContext, useCallback, useEffect, useState } from 'react'
+import { createTheme, styled, ThemeProvider } from '@mui/material'
 import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
@@ -7,6 +7,9 @@ import BottomNav from '../components/BottomNav'
 import { usePersistedArray } from '../hooks/useArray'
 import { States, Entry, Page } from '../types'
 import { BrowserRouter } from "react-router-dom"
+import { RootState } from '../redux/store'
+import { useSelector } from 'react-redux'
+import themeConfigs from '../styles/theme'
 
 
 // .app-ctn
@@ -27,7 +30,8 @@ const FlexColumnDiv = styled('div')`
 export const states = createContext<States>({} as States)
 
 function App() {
-  const { mode, toggleMode, theme } = useColorTheme('dark')
+  const mode = useSelector((state: RootState) => state.theme.mode)
+  const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
   const [page, setPage] = useState<Page>('explorer')
   const {
     value: entries,
@@ -48,7 +52,6 @@ function App() {
 
   return (
     <states.Provider value={{
-      theme: { toggleMode },
       page: { page, setPage },
       entries: { entries, setEntries, pushEntry, removeEntry },
       favorites: { favorites, setFavorites, pushFavorite, removeFavorite },

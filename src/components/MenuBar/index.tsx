@@ -7,16 +7,15 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
-import { states } from '../App'
-import { useContext } from 'react'
 import { useTheme } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { toggleMode } from '../../redux/slices/themeSlice'
 
 
 function MenuBar() {
+  const dispatch = useDispatch()
   const theme = useTheme()
-  const {
-    theme: { toggleMode }
-  } = useContext(states)
+
 
   return (
     <AppBar position="static">
@@ -36,7 +35,7 @@ function MenuBar() {
           sx={{ flexGrow: 1 }}>
           Famous Quotes
         </Typography>
-        <IconButton onClick={() => toggleMode()}>
+        <IconButton onClick={() => dispatch(toggleMode())}>
           {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
       </Toolbar>
