@@ -1,5 +1,6 @@
-import { store } from './redux/store'
+import { store, persistor } from './redux/store'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ThemeProvider, createTheme } from '@mui/material'
@@ -16,9 +17,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={defaultTheme}>
-        <App />
-      </ThemeProvider>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={defaultTheme}>
+          <App />
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 )
