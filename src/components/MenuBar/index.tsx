@@ -9,7 +9,7 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useTheme } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { toggleMode } from '../../redux/slices/themeSlice'
+import { themeActions } from '../../redux/slices/themeSlice'
 
 
 function MenuBar() {
@@ -35,7 +35,7 @@ function MenuBar() {
           sx={{ flexGrow: 1 }}>
           Famous Quotes
         </Typography>
-        <IconButton onClick={() => dispatch(toggleMode())}>
+        <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
           {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
       </Toolbar>

@@ -5,7 +5,7 @@ import {
   FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import themeReducer from './slices/themeSlice'
+import { themeReducer } from './slices/themeSlice'
 
 
 // reducers
