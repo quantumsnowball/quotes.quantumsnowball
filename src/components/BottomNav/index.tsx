@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom'
 
 function BottomNav() {
   const {
-    page: { setPage },
     entries: { pushEntry },
   } = useContext(states)
   const theme = useTheme()
@@ -51,14 +50,12 @@ function BottomNav() {
           to="/explorer"
           label="Explorer"
           icon={<ExploreIcon />}
-          onClick={() => setPage('explorer')}
         />
         <BottomNavigationAction
           component={Link}
           to="/favorites"
           label="Favorites"
           icon={<FavoriteIcon />}
-          onClick={() => setPage('favorites')}
         />
       </BottomNavigation>
       <NextButton fetchQuote={fetchQuote} />

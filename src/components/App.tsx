@@ -1,11 +1,10 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect } from 'react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
-import useColorTheme from '../hooks/useColorTheme'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
 import { usePersistedArray } from '../hooks/useArray'
-import { States, Entry, Page } from '../types'
+import { States, Entry } from '../types'
 import { BrowserRouter } from "react-router-dom"
 import { RootState } from '../redux/store'
 import { useSelector } from 'react-redux'
@@ -32,7 +31,6 @@ export const states = createContext<States>({} as States)
 function App() {
   const mode = useSelector((state: RootState) => state.theme.mode)
   const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
-  const [page, setPage] = useState<Page>('explorer')
   const {
     value: entries,
     setValue: setEntries,
@@ -52,7 +50,6 @@ function App() {
 
   return (
     <states.Provider value={{
-      page: { page, setPage },
       entries: { entries, setEntries, pushEntry, removeEntry },
       favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>

@@ -11,13 +11,7 @@ export interface Entry {
 
 export type ColorMode = 'light' | 'dark'
 
-export type Page = 'explorer' | 'favorites'
-
 export interface States {
-  page: {
-    page: Page,
-    setPage: React.Dispatch<React.SetStateAction<Page>>
-  },
   entries: {
     entries: Entry[],
     setEntries: React.Dispatch<React.SetStateAction<Entry[]>>,
