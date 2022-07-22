@@ -1,12 +1,24 @@
-import { useEffect, useContext } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useContext } from 'react'
 import { styled } from '@mui/material'
 import { states } from '../App'
-import { ExplorerQuoteCard, FavoritesQuoteCard } from './QuoteCard'
-import NextButton from './NextButton'
+import { ExplorerQuoteCard, FavoritesQuoteCard, CardContentProps } from './QuoteCard'
 import { Entry } from '../../types'
-import { getRandomFont } from '../../styles/fonts'
+import { Routes, Route } from 'react-router-dom'
 
+
+interface Page {
+  items: Entry[],
+  Card: (props: CardContentProps) => JSX.Element
+}
+
+function Page({ items, Card }: Page) {
+  return (
+    <>
+      {items.map((entry: Entry, i: number) =>
+        <Card key={entry.uuidv4} index={i} {...entry} />)}
+    </>
+  )
+}
 
 // .main-ctn
 const ScrollableDiv = styled('div')`
@@ -26,36 +38,22 @@ const ScrollableDiv = styled('div')`
 
 function Main() {
   const {
-    page: { page },
-    entries: { entries, pushEntry },
+    entries: { entries },
     favorites: { favorites }
   } = useContext(states)
 
-  async function fetchQuote() {
-    const url = 'https://api.quotable.io/random'
-    const quote = await fetch(url).then(resp => resp.json())
-    pushEntry({
-      uuidv4: uuidv4(),
-      content: { text: quote.content, font: getRandomFont() },
-      author: { text: quote.author, font: getRandomFont() },
-    })
-  }
-
-  useEffect(() => { fetchQuote() }, [])
-
-  const pages = {
-    explorer: entries.map((entry: Entry, i: number) =>
-      <ExplorerQuoteCard key={entry.uuidv4} index={i} {...entry} />),
-    favorites: favorites.map((entry: Entry, i: number) =>
-      <FavoritesQuoteCard key={entry.uuidv4} index={i} {...entry} />)
-  }
+  const explorerPage = <Page items={entries} Card={ExplorerQuoteCard} />
+  const favoritesPage = <Page items={favorites} Card={FavoritesQuoteCard} />
 
   return (
     <>
       <ScrollableDiv className='main-ctn'>
-        {pages[page]}
+        <Routes>
+          <Route path="/" element={explorerPage} />
+          <Route path="/explorer" element={explorerPage} />
+          <Route path="/favorites" element={favoritesPage} />
+        </Routes>
       </ScrollableDiv>
-      <NextButton fetchQuote={fetchQuote} />
     </>
   )
 }

@@ -6,6 +6,7 @@ import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
 import { usePersistedArray } from '../hooks/useArray'
 import { States, Entry, Page } from '../types'
+import { BrowserRouter } from "react-router-dom"
 
 
 // .app-ctn
@@ -53,11 +54,13 @@ function App() {
       favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>
       <ThemeProvider theme={theme}>
-        <FlexColumnDiv className="app-ctn">
-          <MenuBar />
-          <Main />
-          <BottomNav />
-        </FlexColumnDiv>
+        <BrowserRouter>
+          <FlexColumnDiv className="app-ctn">
+            <MenuBar />
+            <Main />
+            <BottomNav />
+          </FlexColumnDiv>
+        </BrowserRouter>
       </ThemeProvider>
     </states.Provider >
   )

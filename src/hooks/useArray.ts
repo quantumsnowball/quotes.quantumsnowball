@@ -7,11 +7,11 @@ export function useArray<T>(initialValue: T[]) {
 
   const push = useCallback((element: T) => {
     setValue(oldValue => [element, ...oldValue])
-  }, [])
+  }, [setValue])
 
   const remove = useCallback((index: number) => {
     setValue(oldValue => oldValue.filter((_, i) => i !== index))
-  }, [])
+  }, [setValue])
 
   function isEmpty() {
     return value.length === 0
@@ -25,11 +25,11 @@ export function usePersistedArray<T>(key: string, initialValue: T[]) {
 
   const push = useCallback((element: T) => {
     setValue(oldValue => [element, ...oldValue])
-  }, [])
+  }, [setValue])
 
   const remove = useCallback((index: number) => {
     setValue(oldValue => oldValue.filter((_, i) => i !== index))
-  }, [])
+  }, [setValue])
 
   function isEmpty() {
     return value.length === 0
