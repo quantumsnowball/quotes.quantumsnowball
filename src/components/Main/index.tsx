@@ -4,6 +4,8 @@ import { states } from '../App'
 import { ExplorerQuoteCard, FavoritesQuoteCard, CardContentProps } from './QuoteCard'
 import { Entry } from '../../types'
 import { Routes, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 
 interface Page {
@@ -37,8 +39,8 @@ const ScrollableDiv = styled('div')`
 `
 
 function Main() {
+  const entries = useSelector(((s: RootState) => s.entries.entries))
   const {
-    entries: { entries },
     favorites: { favorites }
   } = useContext(states)
 

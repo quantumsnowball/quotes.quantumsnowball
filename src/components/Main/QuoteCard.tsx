@@ -14,6 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Entry } from '../../types'
 import { useBoolean } from '../../hooks/useBoolean'
+import { useDispatch } from 'react-redux'
+import { entriesActions } from '../../redux/slices/entriesSlice'
 
 
 // .quotecard-ctn
@@ -80,9 +82,9 @@ export interface CardContentProps extends Entry {
 }
 
 export function ExplorerQuoteCard(props: CardContentProps) {
+  const dispatch = useDispatch()
   const { index, ...entry } = props
   const {
-    entries: { removeEntry },
     favorites: { pushFavorite }
   } = useContext(states)
 
@@ -93,7 +95,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         aria-label="add to favorites"
         onClick={() => {
           pushFavorite(entry)
-          removeEntry(index)
+          dispatch(entriesActions.removeEntry(index))
         }}>
         <FavoriteIcon />
       </IconButton>
@@ -101,7 +103,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from explorer"
-        onClick={() => removeEntry(index)}>
+        onClick={() => dispatch(entriesActions.removeEntry(index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>

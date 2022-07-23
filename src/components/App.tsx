@@ -29,14 +29,8 @@ const FlexColumnDiv = styled('div')`
 export const states = createContext<States>({} as States)
 
 function App() {
-  const mode = useSelector((state: RootState) => state.theme.mode)
+  const mode = useSelector((s: RootState) => s.theme.mode)
   const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
-  const {
-    value: entries,
-    setValue: setEntries,
-    push: pushEntry,
-    remove: removeEntry
-  } = usePersistedArray<Entry>('entries', [])
   const {
     value: favorites,
     setValue: setFavorites,
@@ -50,7 +44,6 @@ function App() {
 
   return (
     <states.Provider value={{
-      entries: { entries, setEntries, pushEntry, removeEntry },
       favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
     }}>
       <ThemeProvider theme={theme}>

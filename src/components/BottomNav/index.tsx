@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { states } from '../App'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import BottomNavigation from '@mui/material/BottomNavigation'
@@ -10,12 +9,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import NextButton from './NextButton'
 import { getRandomFont } from '../../styles/fonts'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { entriesActions } from '../../redux/slices/entriesSlice'
 
 
 function BottomNav() {
-  const {
-    entries: { pushEntry },
-  } = useContext(states)
+  const dispatch = useDispatch()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [value, setValue] = useState(0)
@@ -23,11 +22,11 @@ function BottomNav() {
   async function fetchQuote() {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
-    pushEntry({
+    dispatch(entriesActions.pushEntry({
       uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
-    })
+    }))
   }
 
   useEffect(() => { fetchQuote() }, [])
