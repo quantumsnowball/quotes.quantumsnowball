@@ -49,7 +49,7 @@ function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: Q
         <CardMedia
           component="img"
           height="200"
-          image={`https://picsum.photos/640/480/`}
+          image={`https://picsum.photos/640/480/?${performance.now()}`}
         />
         <CardContent
           onClick={toggleExpanded}>
