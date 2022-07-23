@@ -20,13 +20,20 @@ function BottomNav() {
   const [value, setValue] = useState(0)
 
   const fetchQuote = useCallback(async () => {
-    const url = 'https://api.quotable.io/random'
-    const quote = await fetch(url).then(resp => resp.json())
+    const quote = await
+      fetch('https://api.quotable.io/random')
+        .then(resp => resp.json())
+    const image = await
+      fetch(`https://picsum.photos/640/480/?img=${performance.now()}`)
+        .then(resp => resp.url)
     dispatch(explorerActions.pushEntry({
       uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
-      metadata: { expanded: false }
+      metadata: {
+        expanded: false,
+        image: image
+      }
     }))
   }, [dispatch])
 

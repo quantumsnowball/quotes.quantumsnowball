@@ -8,7 +8,8 @@ export interface Entry {
   content: StyledText,
   author: StyledText,
   metadata: {
-    expanded: boolean
+    expanded: boolean,
+    image: string
   }
 }
 

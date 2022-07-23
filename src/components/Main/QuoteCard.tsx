@@ -35,7 +35,7 @@ interface QuoteCardProps extends CardContentProps {
   toggleExpanded: () => void
 }
 
-function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: QuoteCardProps) {
+function QuoteCard({ content, author, metadata: { image }, cardActions, expanded, toggleExpanded }: QuoteCardProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -49,7 +49,7 @@ function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: Q
         <CardMedia
           component="img"
           height="200"
-          image={`https://picsum.photos/640/480/?${performance.now()}`}
+          image={image}
         />
         <CardContent
           onClick={toggleExpanded}>
