@@ -42,6 +42,7 @@ function BottomNav() {
         }}
         sx={{
           minWidth: isMobile ? 0 : theme.breakpoints.values.sm,
+          minHeight: "56px",
           alignSelf: isMobile ? "stretch" : "center"
         }}
       >
