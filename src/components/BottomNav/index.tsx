@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { states } from '../App'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import BottomNavigation from '@mui/material/BottomNavigation'
@@ -10,28 +9,28 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import NextButton from './NextButton'
 import { getRandomFont } from '../../styles/fonts'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { explorerActions } from '../../redux/slices/explorerSlice'
 
 
 function BottomNav() {
-  const {
-    page: { setPage },
-    entries: { pushEntry },
-  } = useContext(states)
+  const dispatch = useDispatch()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [value, setValue] = useState(0)
 
-  async function fetchQuote() {
+  const fetchQuote = useCallback(async () => {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
-    pushEntry({
+    dispatch(explorerActions.pushEntry({
       uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
-    })
-  }
+      metadata: { expanded: false }
+    }))
+  }, [dispatch])
 
-  useEffect(() => { fetchQuote() }, [])
+  useEffect(() => { fetchQuote() }, [fetchQuote])
 
   return (
     <>
@@ -51,14 +50,12 @@ function BottomNav() {
           to="/explorer"
           label="Explorer"
           icon={<ExploreIcon />}
-          onClick={() => setPage('explorer')}
         />
         <BottomNavigationAction
           component={Link}
           to="/favorites"
           label="Favorites"
           icon={<FavoriteIcon />}
-          onClick={() => setPage('favorites')}
         />
       </BottomNavigation>
       <NextButton fetchQuote={fetchQuote} />

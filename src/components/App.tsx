@@ -1,12 +1,12 @@
-import { createContext, useEffect, useState } from 'react'
-import { styled, ThemeProvider } from '@mui/material'
-import useColorTheme from '../hooks/useColorTheme'
+import { useCallback, useEffect } from 'react'
+import { createTheme, styled, ThemeProvider } from '@mui/material'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
-import { usePersistedArray } from '../hooks/useArray'
-import { States, Entry, Page } from '../types'
 import { BrowserRouter } from "react-router-dom"
+import { RootState } from '../redux/store'
+import { useSelector } from 'react-redux'
+import themeConfigs from '../styles/theme'
 
 
 // .app-ctn
@@ -24,45 +24,24 @@ const FlexColumnDiv = styled('div')`
   background-color: ${props => props.theme.palette.background.default};
 `
 
-export const states = createContext<States>({} as States)
-
 function App() {
-  const { mode, toggleMode, theme } = useColorTheme('dark')
-  const [page, setPage] = useState<Page>('explorer')
-  const {
-    value: entries,
-    setValue: setEntries,
-    push: pushEntry,
-    remove: removeEntry
-  } = usePersistedArray<Entry>('entries', [])
-  const {
-    value: favorites,
-    setValue: setFavorites,
-    push: pushFavorite,
-    remove: removeFavorite
-  } = usePersistedArray<Entry>('favorites', [])
+  const mode = useSelector((s: RootState) => s.theme.mode)
+  const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
   }, [mode])
 
   return (
-    <states.Provider value={{
-      theme: { toggleMode },
-      page: { page, setPage },
-      entries: { entries, setEntries, pushEntry, removeEntry },
-      favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
-    }}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <FlexColumnDiv className="app-ctn">
-            <MenuBar />
-            <Main />
-            <BottomNav />
-          </FlexColumnDiv>
-        </BrowserRouter>
-      </ThemeProvider>
-    </states.Provider >
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <FlexColumnDiv className="app-ctn">
+          <MenuBar />
+          <Main />
+          <BottomNav />
+        </FlexColumnDiv>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
