@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { CardMedia, styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Box from '@mui/material/Box'
@@ -46,6 +46,11 @@ function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: Q
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
+        <CardMedia
+          component="img"
+          height="200"
+          image={`https://picsum.photos/640/480/`}
+        />
         <CardContent
           onClick={toggleExpanded}>
           <Typography
