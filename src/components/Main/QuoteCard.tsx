@@ -41,6 +41,7 @@ function QuoteCard(props: QuoteCardProps) {
   return (
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
+        onClick={toggleExpanded}
         sx={{
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
@@ -50,8 +51,7 @@ function QuoteCard(props: QuoteCardProps) {
           height="200"
           image={metadata.image}
         />
-        <CardContent
-          onClick={toggleExpanded}>
+        <CardContent>
           <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
