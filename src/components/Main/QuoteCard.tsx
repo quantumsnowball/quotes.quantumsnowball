@@ -126,7 +126,7 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       </IconButton>
     </CardActions>
 
-  const expanded = useSelector((s: RootState) => s.favorities.favorites[index].metadata.expanded)
+  const expanded = useSelector((s: RootState) => s.favorities.entries[index].metadata.expanded)
 
   const toggleExpanded = () => dispatch(favoritesActions.toggleExpanded(index))
 

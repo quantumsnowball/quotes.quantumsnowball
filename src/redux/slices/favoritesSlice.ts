@@ -5,18 +5,18 @@ import { Entry } from '../../types'
 const favoritesSlice = createSlice({
   name: 'favorites',
   initialState: {
-    favorites: [] as Entry[]
+    entries: [] as Entry[]
   },
   reducers: {
     pushEntry: (s, a: PayloadAction<Entry>) => {
-      s.favorites = [a.payload, ...s.favorites]
+      s.entries = [a.payload, ...s.entries]
     },
     removeEntry: (s, a: PayloadAction<number>) => {
-      s.favorites = s.favorites.filter((_, i) => i !== a.payload)
+      s.entries = s.entries.filter((_, i) => i !== a.payload)
     },
     toggleExpanded: (s, a: PayloadAction<number>) => {
-      s.favorites[a.payload].metadata.expanded = 
-        !s.favorites[a.payload].metadata.expanded
+      s.entries[a.payload].metadata.expanded =
+        !s.entries[a.payload].metadata.expanded
     }
   }
 })
