@@ -1,25 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Entry } from '../../types'
+import createEntrySlice from './generic/entrySlice'
 
 
-const favoritesSlice = createSlice({
-  name: 'favorites',
-  initialState: {
-    entries: [] as Entry[]
-  },
-  reducers: {
-    pushEntry: (s, a: PayloadAction<Entry>) => {
-      s.entries = [a.payload, ...s.entries]
-    },
-    removeEntry: (s, a: PayloadAction<number>) => {
-      s.entries = s.entries.filter((_, i) => i !== a.payload)
-    },
-    toggleExpanded: (s, a: PayloadAction<number>) => {
-      s.entries[a.payload].metadata.expanded =
-        !s.entries[a.payload].metadata.expanded
-    }
-  }
-})
+const favoritesSlice = createEntrySlice('favorites')
 
 export const favoritesActions = favoritesSlice.actions
 
