@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-import { states } from '../App'
 import { styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -13,7 +11,10 @@ import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Entry } from '../../types'
-import { useBoolean } from '../../hooks/useBoolean'
+import { RootState } from '../../redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { explorerActions } from '../../redux/slices/explorerSlice'
+import { favoritesActions } from '../../redux/slices/favoritesSlice'
 
 
 // .quotecard-ctn
@@ -29,16 +30,14 @@ const FlexColumnDiv = styled(Container)`
 `
 
 interface QuoteCardProps extends CardContentProps {
-  cardActions: JSX.Element
+  cardActions: JSX.Element,
+  expanded: boolean,
+  toggleExpanded: () => void
 }
 
-function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
+function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: QuoteCardProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-  const {
-    value: expanded,
-    toggleValue: toggleExpanded
-  } = useBoolean(false)
 
   return (
     <FlexColumnDiv className='quotecard-ctn'>
@@ -48,7 +47,7 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
           userSelect: 'none'
         }}>
         <CardContent
-          onClick={() => toggleExpanded()}>
+          onClick={toggleExpanded}>
           <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
@@ -80,11 +79,8 @@ export interface CardContentProps extends Entry {
 }
 
 export function ExplorerQuoteCard(props: CardContentProps) {
+  const dispatch = useDispatch()
   const { index, ...entry } = props
-  const {
-    entries: { removeEntry },
-    favorites: { pushFavorite }
-  } = useContext(states)
 
   const cardActions =
     <CardActions disableSpacing>
@@ -92,8 +88,10 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         color="secondary"
         aria-label="add to favorites"
         onClick={() => {
-          pushFavorite(entry)
-          removeEntry(index)
+          dispatch(favoritesActions.pushEntry({
+            ...entry, metadata: { ...entry.metadata, expanded: false }
+          }))
+          dispatch(explorerActions.removeEntry(index))
         }}>
         <FavoriteIcon />
       </IconButton>
@@ -101,18 +99,21 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from explorer"
-        onClick={() => removeEntry(index)}>
+        onClick={() => dispatch(explorerActions.removeEntry(index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
 
-  return <QuoteCard {...{ ...props, cardActions }} />
+  const expanded = useSelector((s: RootState) => s.explorer.entries[index].metadata.expanded)
+
+  const toggleExpanded = () => dispatch(explorerActions.toggleExpanded(index))
+
+  return <QuoteCard {...{ ...props, cardActions, expanded, toggleExpanded }} />
 }
 
 export function FavoritesQuoteCard(props: CardContentProps) {
-  const {
-    favorites: { removeFavorite }
-  } = useContext(states)
+  const dispatch = useDispatch()
+  const { index } = props
 
   const cardActions =
     <CardActions disableSpacing>
@@ -120,10 +121,14 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from favorites"
-        onClick={() => removeFavorite(props.index)}>
+        onClick={() => dispatch(favoritesActions.removeEntry(index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
 
-  return <QuoteCard {...{ ...props, cardActions }} />
+  const expanded = useSelector((s: RootState) => s.favorities.entries[index].metadata.expanded)
+
+  const toggleExpanded = () => dispatch(favoritesActions.toggleExpanded(index))
+
+  return <QuoteCard {...{ ...props, cardActions, expanded, toggleExpanded }} />
 }
