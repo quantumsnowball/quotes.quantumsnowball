@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Entry } from '../../types'
 
 
-const entriesSlice = createSlice({
-  name: 'entries',
+const explorerSlice = createSlice({
+  name: 'explorer',
   initialState: {
     entries: [] as Entry[]
   },
@@ -15,12 +15,12 @@ const entriesSlice = createSlice({
       s.entries = s.entries.filter((_, i) => i !== a.payload)
     },
     toggleExpanded: (s, a: PayloadAction<number>) => {
-      s.entries[a.payload].metadata.expanded = 
+      s.entries[a.payload].metadata.expanded =
         !s.entries[a.payload].metadata.expanded
     }
   }
 })
 
-export const entriesActions = entriesSlice.actions
+export const explorerActions = explorerSlice.actions
 
-export const entriesReducer = entriesSlice.reducer
+export const explorerReducer = explorerSlice.reducer

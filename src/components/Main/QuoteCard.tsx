@@ -13,7 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { Entry } from '../../types'
 import { RootState } from '../../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { entriesActions } from '../../redux/slices/entriesSlice'
+import { explorerActions } from '../../redux/slices/explorerSlice'
 import { favoritesActions } from '../../redux/slices/favoritesSlice'
 
 
@@ -91,7 +91,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
           dispatch(favoritesActions.pushEntry({
             ...entry, metadata: { ...entry.metadata, expanded: false }
           }))
-          dispatch(entriesActions.removeEntry(index))
+          dispatch(explorerActions.removeEntry(index))
         }}>
         <FavoriteIcon />
       </IconButton>
@@ -99,14 +99,14 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from explorer"
-        onClick={() => dispatch(entriesActions.removeEntry(index))}>
+        onClick={() => dispatch(explorerActions.removeEntry(index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
 
-  const expanded = useSelector((s: RootState) => s.entries.entries[index].metadata.expanded)
+  const expanded = useSelector((s: RootState) => s.explorer.entries[index].metadata.expanded)
 
-  const toggleExpanded = () => dispatch(entriesActions.toggleExpanded(index))
+  const toggleExpanded = () => dispatch(explorerActions.toggleExpanded(index))
 
   return <QuoteCard {...{ ...props, cardActions, expanded, toggleExpanded }} />
 }

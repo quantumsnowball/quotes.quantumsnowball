@@ -37,7 +37,7 @@ const ScrollableDiv = styled('div')`
 `
 
 function Main() {
-  const entries = useSelector(((s: RootState) => s.entries.entries))
+  const entries = useSelector(((s: RootState) => s.explorer.entries))
   const favorites = useSelector(((s: RootState) => s.favorities.favorites))
 
   const explorerPage = <Page items={entries} Card={ExplorerQuoteCard} />

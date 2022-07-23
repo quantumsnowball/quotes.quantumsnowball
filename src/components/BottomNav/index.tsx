@@ -10,7 +10,7 @@ import NextButton from './NextButton'
 import { getRandomFont } from '../../styles/fonts'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { entriesActions } from '../../redux/slices/entriesSlice'
+import { explorerActions } from '../../redux/slices/explorerSlice'
 
 
 function BottomNav() {
@@ -22,7 +22,7 @@ function BottomNav() {
   async function fetchQuote() {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
-    dispatch(entriesActions.pushEntry({
+    dispatch(explorerActions.pushEntry({
       uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
@@ -30,7 +30,7 @@ function BottomNav() {
     }))
   }
 
-  useEffect(() => { fetchQuote() }, [])
+  useEffect(() => { fetchQuote() }, [fetchQuote])
 
   return (
     <>

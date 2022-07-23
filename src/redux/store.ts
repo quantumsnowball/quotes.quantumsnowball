@@ -6,14 +6,14 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { themeReducer } from './slices/themeSlice'
-import { entriesReducer } from './slices/entriesSlice'
+import { explorerReducer } from './slices/explorerSlice'
 import { favoritesReducer } from './slices/favoritesSlice'
 
 
 // reducers
 const rootReducer = combineReducers({
   theme: themeReducer,
-  entries: entriesReducer,
+  explorer: explorerReducer,
   favorities: favoritesReducer
 })
 
