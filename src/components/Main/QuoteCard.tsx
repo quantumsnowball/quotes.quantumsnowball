@@ -88,7 +88,9 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         color="secondary"
         aria-label="add to favorites"
         onClick={() => {
-          dispatch(favoritesActions.pushEntry(entry))
+          dispatch(favoritesActions.pushEntry({
+            ...entry, metadata: { ...entry.metadata, expanded: false }
+          }))
           dispatch(entriesActions.removeEntry(index))
         }}>
         <FavoriteIcon />
