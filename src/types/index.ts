@@ -6,7 +6,10 @@ export interface StyledText {
 export interface Entry {
   uuidv4: string,
   content: StyledText,
-  author: StyledText
+  author: StyledText,
+  metadata: {
+    expanded: boolean
+  }
 }
 
 export type ColorMode = 'light' | 'dark'

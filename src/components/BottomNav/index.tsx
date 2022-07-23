@@ -26,6 +26,7 @@ function BottomNav() {
       uuidv4: uuidv4(),
       content: { text: quote.content, font: getRandomFont() },
       author: { text: quote.author, font: getRandomFont() },
+      metadata: { expanded: false }
     }))
   }
 

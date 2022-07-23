@@ -13,6 +13,10 @@ const entriesSlice = createSlice({
     },
     removeEntry: (s, a: PayloadAction<number>) => {
       s.entries = s.entries.filter((_, i) => i !== a.payload)
+    },
+    toggleExpanded: (s, a: PayloadAction<number>) => {
+      s.entries[a.payload].metadata.expanded = 
+        !s.entries[a.payload].metadata.expanded
     }
   }
 })

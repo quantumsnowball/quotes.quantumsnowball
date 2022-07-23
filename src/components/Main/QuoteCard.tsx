@@ -11,8 +11,8 @@ import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Entry } from '../../types'
-import { useBoolean } from '../../hooks/useBoolean'
-import { useDispatch } from 'react-redux'
+import { RootState } from '../../redux/store'
+import { useDispatch, useSelector } from 'react-redux'
 import { entriesActions } from '../../redux/slices/entriesSlice'
 import { favoritesActions } from '../../redux/slices/favoritesSlice'
 
@@ -30,16 +30,14 @@ const FlexColumnDiv = styled(Container)`
 `
 
 interface QuoteCardProps extends CardContentProps {
-  cardActions: JSX.Element
+  cardActions: JSX.Element,
+  expanded: boolean,
+  toggleExpanded: () => void
 }
 
-function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
+function QuoteCard({ content, author, cardActions, expanded, toggleExpanded }: QuoteCardProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-  const {
-    value: expanded,
-    toggleValue: toggleExpanded
-  } = useBoolean(false)
 
   return (
     <FlexColumnDiv className='quotecard-ctn'>
@@ -49,7 +47,7 @@ function QuoteCard({ content, author, cardActions }: QuoteCardProps) {
           userSelect: 'none'
         }}>
         <CardContent
-          onClick={() => toggleExpanded()}>
+          onClick={toggleExpanded}>
           <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
@@ -104,11 +102,16 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       </IconButton>
     </CardActions>
 
-  return <QuoteCard {...{ ...props, cardActions }} />
+  const expanded = useSelector((s: RootState) => s.entries.entries[index].metadata.expanded)
+
+  const toggleExpanded = () => dispatch(entriesActions.toggleExpanded(index))
+
+  return <QuoteCard {...{ ...props, cardActions, expanded, toggleExpanded }} />
 }
 
 export function FavoritesQuoteCard(props: CardContentProps) {
   const dispatch = useDispatch()
+  const { index } = props
 
   const cardActions =
     <CardActions disableSpacing>
@@ -116,10 +119,14 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from favorites"
-        onClick={() => dispatch(favoritesActions.removeEntry(props.index))}>
+        onClick={() => dispatch(favoritesActions.removeEntry(index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
 
-  return <QuoteCard {...{ ...props, cardActions }} />
+  const expanded = useSelector((s: RootState) => s.favorities.favorites[index].metadata.expanded)
+
+  const toggleExpanded = () => dispatch(favoritesActions.toggleExpanded(index))
+
+  return <QuoteCard {...{ ...props, cardActions, expanded, toggleExpanded }} />
 }
