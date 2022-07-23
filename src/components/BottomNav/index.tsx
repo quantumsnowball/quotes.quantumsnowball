@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -19,7 +19,7 @@ function BottomNav() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [value, setValue] = useState(0)
 
-  async function fetchQuote() {
+  const fetchQuote = useCallback(async () => {
     const url = 'https://api.quotable.io/random'
     const quote = await fetch(url).then(resp => resp.json())
     dispatch(explorerActions.pushEntry({
@@ -28,7 +28,7 @@ function BottomNav() {
       author: { text: quote.author, font: getRandomFont() },
       metadata: { expanded: false }
     }))
-  }
+  }, [dispatch])
 
   useEffect(() => { fetchQuote() }, [fetchQuote])
 
