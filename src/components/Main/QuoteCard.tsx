@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-import { states } from '../App'
 import { styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -16,6 +14,7 @@ import { Entry } from '../../types'
 import { useBoolean } from '../../hooks/useBoolean'
 import { useDispatch } from 'react-redux'
 import { entriesActions } from '../../redux/slices/entriesSlice'
+import { favoritesActions } from '../../redux/slices/favoritesSlice'
 
 
 // .quotecard-ctn
@@ -84,9 +83,6 @@ export interface CardContentProps extends Entry {
 export function ExplorerQuoteCard(props: CardContentProps) {
   const dispatch = useDispatch()
   const { index, ...entry } = props
-  const {
-    favorites: { pushFavorite }
-  } = useContext(states)
 
   const cardActions =
     <CardActions disableSpacing>
@@ -94,7 +90,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         color="secondary"
         aria-label="add to favorites"
         onClick={() => {
-          pushFavorite(entry)
+          dispatch(favoritesActions.pushEntry(entry))
           dispatch(entriesActions.removeEntry(index))
         }}>
         <FavoriteIcon />
@@ -112,9 +108,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
 }
 
 export function FavoritesQuoteCard(props: CardContentProps) {
-  const {
-    favorites: { removeFavorite }
-  } = useContext(states)
+  const dispatch = useDispatch()
 
   const cardActions =
     <CardActions disableSpacing>
@@ -122,7 +116,7 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from favorites"
-        onClick={() => removeFavorite(props.index)}>
+        onClick={() => dispatch(favoritesActions.removeEntry(props.index))}>
         <DeleteIcon />
       </IconButton>
     </CardActions>

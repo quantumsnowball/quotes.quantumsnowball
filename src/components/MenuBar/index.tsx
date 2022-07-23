@@ -14,7 +14,6 @@ function MenuBar() {
   const dispatch = useDispatch()
   const theme = useTheme()
 
-
   return (
     <AppBar position="static">
       <Toolbar>

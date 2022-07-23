@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import { styled } from '@mui/material'
-import { states } from '../App'
 import { ExplorerQuoteCard, FavoritesQuoteCard, CardContentProps } from './QuoteCard'
 import { Entry } from '../../types'
 import { Routes, Route } from 'react-router-dom'
@@ -8,12 +6,12 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
 
-interface Page {
+interface PageProps {
   items: Entry[],
   Card: (props: CardContentProps) => JSX.Element
 }
 
-function Page({ items, Card }: Page) {
+function Page({ items, Card }: PageProps) {
   return (
     <>
       {items.map((entry: Entry, i: number) =>
@@ -40,9 +38,7 @@ const ScrollableDiv = styled('div')`
 
 function Main() {
   const entries = useSelector(((s: RootState) => s.entries.entries))
-  const {
-    favorites: { favorites }
-  } = useContext(states)
+  const favorites = useSelector(((s: RootState) => s.favorities.favorites))
 
   const explorerPage = <Page items={entries} Card={ExplorerQuoteCard} />
   const favoritesPage = <Page items={favorites} Card={FavoritesQuoteCard} />

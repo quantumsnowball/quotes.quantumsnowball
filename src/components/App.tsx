@@ -1,10 +1,8 @@
-import { createContext, useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
 import Main from '../components/Main'
 import MenuBar from '../components/MenuBar'
 import BottomNav from '../components/BottomNav'
-import { usePersistedArray } from '../hooks/useArray'
-import { States, Entry } from '../types'
 import { BrowserRouter } from "react-router-dom"
 import { RootState } from '../redux/store'
 import { useSelector } from 'react-redux'
@@ -26,36 +24,24 @@ const FlexColumnDiv = styled('div')`
   background-color: ${props => props.theme.palette.background.default};
 `
 
-export const states = createContext<States>({} as States)
-
 function App() {
   const mode = useSelector((s: RootState) => s.theme.mode)
   const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
-  const {
-    value: favorites,
-    setValue: setFavorites,
-    push: pushFavorite,
-    remove: removeFavorite
-  } = usePersistedArray<Entry>('favorites', [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
   }, [mode])
 
   return (
-    <states.Provider value={{
-      favorites: { favorites, setFavorites, pushFavorite, removeFavorite },
-    }}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <FlexColumnDiv className="app-ctn">
-            <MenuBar />
-            <Main />
-            <BottomNav />
-          </FlexColumnDiv>
-        </BrowserRouter>
-      </ThemeProvider>
-    </states.Provider >
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <FlexColumnDiv className="app-ctn">
+          <MenuBar />
+          <Main />
+          <BottomNav />
+        </FlexColumnDiv>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
