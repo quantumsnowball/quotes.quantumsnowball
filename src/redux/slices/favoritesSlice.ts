@@ -2,13 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Entry } from '../../types'
 
 
-const initialState = {
-  favorites: [] as Entry[]
-}
-
 const favoritesSlice = createSlice({
   name: 'favorites',
-  initialState,
+  initialState: {
+    favorites: [] as Entry[]
+  },
   reducers: {
     pushEntry: (s, a: PayloadAction<Entry>) => {
       s.favorites = [a.payload, ...s.favorites]
