@@ -50,8 +50,6 @@ function BottomNav() {
       })
   }, [dispatch])
 
-  useEffect(() => { fetchQuote() }, [fetchQuote])
-
   return (
     <>
       <BottomNavigation
