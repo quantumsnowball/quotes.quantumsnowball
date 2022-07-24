@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { Stack } from '@mui/material'
 import { Entry } from '../../types'
 import { useDispatch } from 'react-redux'
 import { explorerActions } from '../../redux/slices/explorerSlice'
@@ -65,7 +66,11 @@ function QuoteCard(props: QuoteCardProps) {
           fontWeight: 'bold'
         }}>
         {author.text}
-      </Typography> : null}
+      </Typography> :
+        <Stack>
+          {[...Array(7)].map(_ => <Skeleton />)}
+        </Stack>
+      }
     </CardContent>
 
   return (
