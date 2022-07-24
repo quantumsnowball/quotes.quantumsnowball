@@ -1,4 +1,4 @@
-import { CardContentProps } from './QuoteCard'
+import { CardContentProps } from './Card'
 import { Entry } from '../../../types'
 
 

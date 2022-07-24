@@ -1,5 +1,5 @@
 import { styled } from '@mui/material'
-import { ExplorerQuoteCard, FavoritesQuoteCard } from './Pages/QuoteCard'
+import { ExplorerQuoteCard, FavoritesQuoteCard } from './Pages/Card'
 import { Routes, Route } from 'react-router-dom'
 import Page from './Pages'
 import { useSelector } from 'react-redux'
