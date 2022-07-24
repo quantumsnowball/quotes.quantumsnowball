@@ -41,7 +41,12 @@ function QuoteView(props: QuoteViewProps) {
       :
       <Skeleton variant="rectangular" height={200} />
   const content =
-    <CardContent>
+    <CardContent
+      sx={{
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        alignItem: 'stretch'
+      }}>
       {quote ?
         <Typography
           variant={isMobile ? "h6" : "h5"}
@@ -68,7 +73,7 @@ function QuoteView(props: QuoteViewProps) {
           {author.text}
         </Typography>
         :
-        <Skeleton height="100px" />}
+        <Skeleton height="100px" width="40%" sx={{ alignSelf: 'flex-end' }} />}
     </CardContent>
 
   return (
