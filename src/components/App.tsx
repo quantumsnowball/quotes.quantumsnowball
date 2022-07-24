@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
-  }, [mode])
+  }, [mode, theme])
 
   return (
     <ThemeProvider theme={theme}>
