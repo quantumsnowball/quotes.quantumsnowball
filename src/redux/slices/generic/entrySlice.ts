@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Content, Entry } from '../../../types'
+import { Content, Media, Entry } from '../../../types'
 
 
 const defaultState = {
@@ -23,6 +23,13 @@ const createEntrySlice =
             if (v.uuidv4 === a.payload.uuidv4) {
               s.entries[i].quote = a.payload.content.quote
               s.entries[i].author = a.payload.content.author
+            }
+          })
+        },
+        updateMedia: (s, a: PayloadAction<{ uuidv4: string, media: Media }>) => {
+          s.entries.forEach((v, i) => {
+            if (v.uuidv4 === a.payload.uuidv4) {
+              s.entries[i].image = a.payload.media.image
             }
           })
         },

@@ -45,6 +45,7 @@ function BottomNav() {
     await fetch(`https://picsum.photos/640/480/?img=${performance.now()}`)
       .then(async resp => {
         const image = resp.url
+        dispatch(explorerActions.updateMedia({ uuidv4, media: { image } }))
       })
   }, [dispatch])
 
