@@ -26,7 +26,7 @@ function ContentView({ quote, author, isMobile }: ContentViewProps) {
         </Typography>
         :
         <Stack>
-          {[...Array(7)].map(_ => <Skeleton />)}
+          {[...Array(7)].map((_, i) => <Skeleton key={i} />)}
         </Stack>}
       {author ?
         <Typography
