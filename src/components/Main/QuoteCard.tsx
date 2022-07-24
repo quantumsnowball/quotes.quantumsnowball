@@ -6,6 +6,7 @@ import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
+import Skeleton from '@mui/material/Skeleton'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -43,7 +44,7 @@ function QuoteCard(props: QuoteCardProps) {
       component="img"
       height="200"
       image={image}
-    /> : null
+    /> : <Skeleton variant="rectangular" height={200} />
   const content =
     <CardContent>
       {quote ? <Typography
