@@ -1,5 +1,7 @@
-import Box from '@mui/material/Box'
-import Fab from '@mui/material/Fab'
+import {
+  Box,
+  Fab
+} from '@mui/material'
 import GetAppIcon from '@mui/icons-material/GetApp'
 
 
