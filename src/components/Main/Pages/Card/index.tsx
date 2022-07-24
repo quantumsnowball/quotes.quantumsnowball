@@ -1,10 +1,11 @@
 import {
   Box,
+  Button,
   CardActions,
   IconButton,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import FavoriteIcon from '@mui/icons-material/Delete'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { Entry } from '../../../../types'
 import { useDispatch } from 'react-redux'
 import { explorerActions } from '../../../../redux/slices/explorerSlice'
