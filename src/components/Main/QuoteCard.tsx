@@ -34,7 +34,7 @@ interface QuoteCardProps extends CardContentProps {
 }
 
 function QuoteCard(props: QuoteCardProps) {
-  const { content, author, metadata, cardActions, toggleExpanded } = props
+  const { quote, author, image, expanded, cardActions, toggleExpanded } = props
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -46,18 +46,18 @@ function QuoteCard(props: QuoteCardProps) {
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
-        {metadata.image ? <CardMedia
+        {image ? <CardMedia
           component="img"
           height="200"
-          image={metadata.image}
+          image={image}
         /> : null}
         <CardContent>
-          {content ? <Typography
+          {quote ? <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
-              fontFamily: content.font
+              fontFamily: quote.font
             }}>
-            {content.text}
+            {quote.text}
           </Typography> : null}
           {author ? <Typography
             variant={isMobile ? "h6" : "h4"}
@@ -72,7 +72,7 @@ function QuoteCard(props: QuoteCardProps) {
             {author.text}
           </Typography> : null}
         </CardContent>
-        {metadata.expanded ? cardActions : null}
+        {expanded ? cardActions : null}
       </Card>
     </FlexColumnDiv>
   )
@@ -93,9 +93,7 @@ export function ExplorerQuoteCard(props: CardContentProps) {
         aria-label="add to favorites"
         onClick={e => {
           e.stopPropagation()
-          dispatch(favoritesActions.pushEntry({
-            ...entry, metadata: { ...entry.metadata, expanded: false }
-          }))
+          dispatch(favoritesActions.pushEntry({ ...entry, expanded: false }))
           dispatch(explorerActions.removeEntry(index))
         }}>
         <FavoriteIcon />
