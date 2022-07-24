@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 import { v4 } from 'uuid'
 import { useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import {
+  BottomNavigation, BottomNavigationAction,
+  useMediaQuery,
+} from '@mui/material'
 import ExploreIcon from '@mui/icons-material/Explore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import NextButton from './NextButton'

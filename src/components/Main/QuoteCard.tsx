@@ -1,17 +1,14 @@
-import { CardMedia, styled } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Skeleton from '@mui/material/Skeleton'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import {
+  Box, Container, Stack,
+  Card, CardContent, CardActions, CardMedia,
+  Typography,
+  Skeleton,
+  IconButton,
+  useMediaQuery, styled
+} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Stack } from '@mui/material'
+import FavoriteIcon from '@mui/icons-material/Delete'
 import { Entry } from '../../types'
 import { useDispatch } from 'react-redux'
 import { explorerActions } from '../../redux/slices/explorerSlice'
