@@ -46,20 +46,20 @@ function QuoteCard(props: QuoteCardProps) {
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
-        <CardMedia
+        {metadata.image ? <CardMedia
           component="img"
           height="200"
           image={metadata.image}
-        />
+        /> : null}
         <CardContent>
-          <Typography
+          {content ? <Typography
             variant={isMobile ? "h6" : "h5"}
             sx={{
               fontFamily: content.font
             }}>
             {content.text}
-          </Typography>
-          <Typography
+          </Typography> : null}
+          {author ? <Typography
             variant={isMobile ? "h6" : "h4"}
             sx={{
               textAlign: 'right',
@@ -70,7 +70,7 @@ function QuoteCard(props: QuoteCardProps) {
               fontWeight: 'bold'
             }}>
             {author.text}
-          </Typography>
+          </Typography> : null}
         </CardContent>
         {metadata.expanded ? cardActions : null}
       </Card>

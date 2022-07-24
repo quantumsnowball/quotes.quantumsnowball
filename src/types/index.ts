@@ -5,11 +5,11 @@ export interface StyledText {
 
 export interface Entry {
   uuidv4: string,
-  content: StyledText,
-  author: StyledText,
+  content: StyledText | null,
+  author: StyledText | null,
   metadata: {
     expanded: boolean,
-    image: string
+    image: string | null
   }
 }
 
