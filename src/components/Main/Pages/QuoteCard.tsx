@@ -9,10 +9,10 @@ import {
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteIcon from '@mui/icons-material/Delete'
-import { Entry } from '../../types'
+import { Entry } from '../../../types'
 import { useDispatch } from 'react-redux'
-import { explorerActions } from '../../redux/slices/explorerSlice'
-import { favoritesActions } from '../../redux/slices/favoritesSlice'
+import { explorerActions } from '../../../redux/slices/explorerSlice'
+import { favoritesActions } from '../../../redux/slices/favoritesSlice'
 
 
 // .quotecard-ctn
