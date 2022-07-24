@@ -1,11 +1,7 @@
-import { useTheme } from '@mui/material/styles'
 import {
-  Box, Container, Stack,
-  Card, CardContent, CardActions, CardMedia,
-  Typography,
-  Skeleton,
+  Box,
+  CardActions,
   IconButton,
-  useMediaQuery, styled
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteIcon from '@mui/icons-material/Delete'
