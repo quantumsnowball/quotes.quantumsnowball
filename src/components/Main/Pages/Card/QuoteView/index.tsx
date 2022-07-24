@@ -1,12 +1,13 @@
 import { useTheme } from '@mui/material/styles'
 import {
   Container, Stack,
-  Card, CardContent, CardMedia,
+  Card, CardContent,
   Typography,
   Skeleton,
   useMediaQuery, styled
 } from '@mui/material'
-import { CardContentProps } from './'
+import { CardContentProps } from '../'
+import MediaView from './MediaView'
 
 
 // .quotecard-ctn
@@ -31,15 +32,6 @@ function QuoteView(props: QuoteViewProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-  const media =
-    image ?
-      <CardMedia
-        component="img"
-        height="200"
-        image={image}
-      />
-      :
-      <Skeleton variant="rectangular" height={200} />
   const content =
     <CardContent
       sx={{
@@ -84,7 +76,7 @@ function QuoteView(props: QuoteViewProps) {
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
-        {media}
+        <MediaView image={image} />
         {content}
         {expanded ? cardActions : null}
       </Card>
