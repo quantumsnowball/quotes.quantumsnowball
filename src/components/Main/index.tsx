@@ -1,24 +1,10 @@
 import { styled } from '@mui/material'
-import { ExplorerQuoteCard, FavoritesQuoteCard, CardContentProps } from './QuoteCard'
-import { Entry } from '../../types'
+import { ExplorerQuoteCard, FavoritesQuoteCard } from './Pages/Card'
 import { Routes, Route } from 'react-router-dom'
+import Page from './Pages'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
-
-interface PageProps {
-  items: Entry[],
-  Card: (props: CardContentProps) => JSX.Element
-}
-
-function Page({ items, Card }: PageProps) {
-  return (
-    <>
-      {items.map((entry: Entry, i: number) =>
-        <Card key={entry.uuidv4} index={i} {...entry} />)}
-    </>
-  )
-}
 
 // .main-ctn
 const ScrollableDiv = styled('div')`
