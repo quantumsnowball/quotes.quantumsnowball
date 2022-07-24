@@ -38,6 +38,35 @@ function QuoteCard(props: QuoteCardProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
+  const media = image ?
+    <CardMedia
+      component="img"
+      height="200"
+      image={image}
+    /> : null
+  const content =
+    <CardContent>
+      {quote ? <Typography
+        variant={isMobile ? "h6" : "h5"}
+        sx={{
+          fontFamily: quote.font
+        }}>
+        {quote.text}
+      </Typography> : null}
+      {author ? <Typography
+        variant={isMobile ? "h6" : "h4"}
+        sx={{
+          textAlign: 'right',
+          marginTop: isMobile ? "2%" : "5%",
+          marginBottom: '1%',
+          fontFamily: author.font,
+          fontStyle: 'italic',
+          fontWeight: 'bold'
+        }}>
+        {author.text}
+      </Typography> : null}
+    </CardContent>
+
   return (
     <FlexColumnDiv className='quotecard-ctn'>
       <Card
@@ -46,32 +75,8 @@ function QuoteCard(props: QuoteCardProps) {
           padding: isMobile ? 2 : 4,
           userSelect: 'none'
         }}>
-        {image ? <CardMedia
-          component="img"
-          height="200"
-          image={image}
-        /> : null}
-        <CardContent>
-          {quote ? <Typography
-            variant={isMobile ? "h6" : "h5"}
-            sx={{
-              fontFamily: quote.font
-            }}>
-            {quote.text}
-          </Typography> : null}
-          {author ? <Typography
-            variant={isMobile ? "h6" : "h4"}
-            sx={{
-              textAlign: 'right',
-              marginTop: isMobile ? "2%" : "5%",
-              marginBottom: '1%',
-              fontFamily: author.font,
-              fontStyle: 'italic',
-              fontWeight: 'bold'
-            }}>
-            {author.text}
-          </Typography> : null}
-        </CardContent>
+        {media}
+        {content}
         {expanded ? cardActions : null}
       </Card>
     </FlexColumnDiv>
