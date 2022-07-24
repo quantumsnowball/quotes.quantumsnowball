@@ -51,7 +51,9 @@ function QuoteView(props: QuoteViewProps) {
           {quote.text}
         </Typography>
         :
-        null}
+        <Stack>
+          {[...Array(7)].map(_ => <Skeleton />)}
+        </Stack>}
       {author ?
         <Typography
           variant={isMobile ? "h6" : "h4"}
@@ -66,9 +68,7 @@ function QuoteView(props: QuoteViewProps) {
           {author.text}
         </Typography>
         :
-        <Stack>
-          {[...Array(7)].map(_ => <Skeleton />)}
-        </Stack>}
+        <Skeleton height="100px" />}
     </CardContent>
 
   return (
