@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
-import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
@@ -8,8 +7,26 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+import ColorLensIcon from '@mui/icons-material/ColorLens'
 
+
+const MenuTitle = ({ title }: { title: string }) =>
+  <List>
+    <ListItem>
+      <ListItemText primary={title} />
+    </ListItem>
+  </List>
+
+const MenuButton = ({ icon, text, onClick }:
+  { icon: JSX.Element, text: string, onClick?: () => void | null }) =>
+  <ListItem key={text} disablePadding>
+    <ListItemButton onClick={onClick}>
+      <ListItemIcon>
+        {icon}
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem>
 
 interface MenuDrawerProps {
   menuOpen: boolean,
@@ -28,8 +45,25 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
         sx={{
           width: 250
         }}
+        role="presentation"
+        onClick={() => setMenuOpen(false)}
+        onKeyDown={() => setMenuOpen(false)}
       >
+        <MenuTitle title='Famous Quote' />
         <Divider />
+        <List>
+          <MenuButton
+            icon={<ColorLensIcon />}
+            text='Default Theme'
+            onClick={() => alert('Slecting default theme')}
+          />
+        </List>
+        <Divider />
+        <MenuButton
+          icon={<InboxIcon />}
+          text='About'
+          onClick={() => alert('Famous Quotes Version 1.3.0')}
+        />
       </Box>
     </SwipeableDrawer>
   )
