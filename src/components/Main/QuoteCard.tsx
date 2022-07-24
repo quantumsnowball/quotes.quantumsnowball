@@ -91,7 +91,8 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="secondary"
         aria-label="add to favorites"
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation()
           dispatch(favoritesActions.pushEntry({
             ...entry, metadata: { ...entry.metadata, expanded: false }
           }))
@@ -103,7 +104,10 @@ export function ExplorerQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from explorer"
-        onClick={() => dispatch(explorerActions.removeEntry(index))}>
+        onClick={e => {
+          e.stopPropagation()
+          dispatch(explorerActions.removeEntry(index))
+        }}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
@@ -123,7 +127,10 @@ export function FavoritesQuoteCard(props: CardContentProps) {
       <IconButton
         color="error"
         aria-label="delete from favorites"
-        onClick={() => dispatch(favoritesActions.removeEntry(index))}>
+        onClick={e => {
+          e.stopPropagation()
+          dispatch(favoritesActions.removeEntry(index))
+        }}>
         <DeleteIcon />
       </IconButton>
     </CardActions>
