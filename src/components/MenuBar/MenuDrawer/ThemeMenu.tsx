@@ -43,6 +43,12 @@ function ThemeMenu() {
             onClick={() => dispatch(themeActions.setTheme('forest'))}
             level={1}
           />
+          <MenuButton
+            icon={<ForestIcon />}
+            text='Rose'
+            onClick={() => dispatch(themeActions.setTheme('rose'))}
+            level={1}
+          />
         </List>
       </Collapse>
     </>
