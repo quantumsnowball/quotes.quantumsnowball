@@ -42,7 +42,8 @@ function MenuBar() {
             Famous Quotes
           </Typography>
           <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
-            {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
+            {theme.palette.mode === 'light' ?
+              <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
           </IconButton>
         </Toolbar>
       </AppBar>

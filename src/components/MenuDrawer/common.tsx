@@ -28,7 +28,7 @@ export const MenuLabel = (
 
 export const MenuButton = (
   { icon, text, onClick, level = 0 }:
-    { icon: JSX.Element, text: string, onClick?: () => void, level?: number }
+    { icon: JSX.Element, text: string, onClick?: React.MouseEventHandler<HTMLDivElement> | undefined, level?: number }
 ) =>
   <ListItem key={text} disablePadding>
     <ListItemButton onClick={onClick} sx={{ paddingLeft: 2 + level * 2 }}>
