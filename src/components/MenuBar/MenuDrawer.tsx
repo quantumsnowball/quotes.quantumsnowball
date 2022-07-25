@@ -1,10 +1,16 @@
 import {
   Box, Divider,
   List, ListItem, ListItemButton, ListItemIcon, ListItemText,
-  SwipeableDrawer
+  SwipeableDrawer, Collapse
 } from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+import { useDispatch } from 'react-redux'
+import { layoutActions } from '../../redux/slices/layoutSlice'
 
 
 const MenuTitle = ({ title }: { title: string }) =>
@@ -14,14 +20,31 @@ const MenuTitle = ({ title }: { title: string }) =>
     </ListItem>
   </List>
 
-const MenuButton = ({ icon, text, onClick }:
-  { icon: JSX.Element, text: string, onClick?: () => void | null }) =>
+const MenuButton = ({ icon, text, onClick, level = 0 }:
+  { icon: JSX.Element, text: string, onClick?: () => void | null, level?: number }) =>
   <ListItem key={text} disablePadding>
-    <ListItemButton onClick={onClick}>
+    <ListItemButton onClick={onClick} sx={{ paddingLeft: 2 + level * 2 }}>
       <ListItemIcon>
         {icon}
       </ListItemIcon>
       <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem >
+
+const MenuButtonGrouper = (
+  { icon, text, open, toggle }:
+    { icon: JSX.Element, text: string, open: boolean, toggle: () => void }
+) =>
+  <ListItem key={text} disablePadding>
+    <ListItemButton onClick={e => {
+      e.stopPropagation()
+      toggle()
+    }}>
+      <ListItemIcon>
+        {icon}
+      </ListItemIcon>
+      <ListItemText primary={text} />
+      {open ? <ExpandLess /> : <ExpandMore />}
     </ListItemButton>
   </ListItem>
 
@@ -31,6 +54,9 @@ interface MenuDrawerProps {
 }
 
 function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
+  const menuThemeExpanded = useSelector((s: RootState) => s.layout.menuThemeExpanded)
+  const dispatch = useDispatch()
+
   return (
     <SwipeableDrawer
       anchor="left"
@@ -48,13 +74,22 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
       >
         <MenuTitle title='Famous Quote' />
         <Divider />
-        <List>
-          <MenuButton
-            icon={<ColorLensIcon />}
-            text='Default Theme'
-            onClick={() => alert('Slecting default theme')}
-          />
-        </List>
+        <MenuButtonGrouper
+          icon={<ColorLensIcon />}
+          text="Theme"
+          open={menuThemeExpanded}
+          toggle={() => dispatch(layoutActions.toggleMenuThemeExpanded())}
+        />
+        <Collapse in={menuThemeExpanded} timeout="auto" unmountOnExit>
+          <List>
+            <MenuButton
+              icon={<ColorLensIcon />}
+              text='Default Theme'
+              onClick={() => alert('Slecting default theme')}
+              level={1}
+            />
+          </List>
+        </Collapse>
         <Divider />
         <MenuButton
           icon={<InboxIcon />}
