@@ -3,15 +3,16 @@ import {
   List, ListItem, ListItemButton, ListItemIcon, ListItemText,
   SwipeableDrawer, Collapse
 } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
+import InfoIcon from '@mui/icons-material/Info'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../redux/slices/layoutSlice'
+import { useState } from 'react'
 
 
 const MenuTitle = (
@@ -23,6 +24,17 @@ const MenuTitle = (
       <ListItemText primary={title} />
     </ListItem>
   </List>
+
+const MenuLabel = (
+  { icon, label, level = 0, primaryTypographyProps }:
+    { icon: JSX.Element, label: string, level?: number, primaryTypographyProps?: object }
+) =>
+  <ListItem key={label} disablePadding sx={{ paddingLeft: 2 + level * 2 }}>
+    <ListItemIcon>
+      {icon}
+    </ListItemIcon>
+    <ListItemText primary={label} primaryTypographyProps={primaryTypographyProps} />
+  </ListItem>
 
 const MenuButton = (
   { icon, text, onClick, level = 0 }:
@@ -60,8 +72,9 @@ interface MenuDrawerProps {
 }
 
 function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
-  const menuThemeExpanded = useSelector((s: RootState) => s.layout.menuThemeExpanded)
   const dispatch = useDispatch()
+  const menuThemeExpanded = useSelector((s: RootState) => s.layout.menuThemeExpanded)
+  const menuAboutExpanded = useSelector((s: RootState) => s.layout.menuAboutExpanded)
 
   return (
     <SwipeableDrawer
@@ -78,7 +91,7 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
         onClick={() => setMenuOpen(false)}
         onKeyDown={() => setMenuOpen(false)}
       >
-        <MenuTitle title='Famous Quote' />
+        <MenuTitle title={`Quote, v${process.env.REACT_APP_VERSION}`} />
         <Divider />
         <MenuButtonGrouper
           icon={<ColorLensIcon />}
@@ -97,11 +110,27 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
           </List>
         </Collapse>
         <Divider />
-        <MenuButton
+        <MenuButtonGrouper
           icon={<HelpOutlineIcon />}
-          text='About'
-          onClick={() => alert(`Quotes ${process.env.REACT_APP_VERSION}`)}
+          text="About Quotes"
+          open={menuAboutExpanded}
+          toggle={() => dispatch(layoutActions.toggleMenuAboutExpanded())}
         />
+        <Collapse in={menuAboutExpanded} timeout="auto" unmountOnExit>
+          <List>
+            <MenuLabel
+              icon={<InfoIcon />}
+              label={`version ${process.env.REACT_APP_VERSION}`}
+              level={1}
+            />
+            <MenuLabel
+              icon={<InfoIcon />}
+              label={`@2022\nQuantum Snowball`}
+              level={1}
+              primaryTypographyProps={{ variant: 'caption' }}
+            />
+          </List>
+        </Collapse>
       </Box>
     </SwipeableDrawer>
   )
