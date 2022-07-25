@@ -26,6 +26,7 @@ function AboutMenu() {
             icon={<InfoIcon />}
             label={`version ${process.env.REACT_APP_VERSION}`}
             level={1}
+            primaryTypographyProps={{ variant: 'caption' }}
           />
           <MenuLabel
             icon={<InfoIcon />}
