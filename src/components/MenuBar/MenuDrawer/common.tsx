@@ -28,7 +28,7 @@ export const MenuLabel = (
 
 export const MenuButton = (
   { icon, text, onClick, level = 0 }:
-    { icon: JSX.Element, text: string, onClick?: () => void | null, level?: number }
+    { icon: JSX.Element, text: string, onClick?: () => void, level?: number }
 ) =>
   <ListItem key={text} disablePadding>
     <ListItemButton onClick={onClick} sx={{ paddingLeft: 2 + level * 2 }}>

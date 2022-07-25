@@ -1,7 +1,8 @@
 import { PaletteMode } from '@mui/material'
+import { ThemeName } from '../types'
 
 
-const themeConfigs = (mode: PaletteMode) => ({
+const elementary = (mode: PaletteMode) => ({
   palette: {
     mode,
     ...(mode === 'light'
@@ -22,4 +23,29 @@ const themeConfigs = (mode: PaletteMode) => ({
   },
 })
 
-export default themeConfigs
+const beach = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        background: {
+          default: '#fff59d',
+          paper: '#fff9c4',
+        },
+      }
+      : {
+        // palette values for dark mode
+        background: {
+          default: '#433d25',
+          paper: '#484834',
+        },
+      }),
+  },
+})
+
+const chooseTheme = (name: ThemeName) => ({
+  elementary, beach
+}[name])
+
+export default chooseTheme

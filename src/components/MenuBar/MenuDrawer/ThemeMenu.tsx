@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../../redux/slices/layoutSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
+import { themeActions } from '../../../redux/slices/themeSlice'
 import { MenuButton, MenuButtonGrouper } from './common'
 
 
@@ -23,8 +24,14 @@ function ThemeMenu() {
         <List>
           <MenuButton
             icon={<ColorLensIcon />}
-            text='Default Theme'
-            onClick={() => alert('Slecting default theme')}
+            text='Elementary'
+            onClick={() => dispatch(themeActions.setTheme('elementary'))}
+            level={1}
+          />
+          <MenuButton
+            icon={<ColorLensIcon />}
+            text='Beach'
+            onClick={() => dispatch(themeActions.setTheme('beach'))}
             level={1}
           />
         </List>
