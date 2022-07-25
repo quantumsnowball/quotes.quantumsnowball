@@ -122,8 +122,29 @@ const sunset = (mode: PaletteMode) => ({
   },
 })
 
+const ocean = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        background: {
+          default: '#64b5f6',
+          paper: '#90caf9',
+        },
+      }
+      : {
+        // palette values for dark mode
+        background: {
+          default: '#0d283d',
+          paper: '#1f3e56',
+        },
+      }),
+  },
+})
+
 const chooseTheme = (name: ThemeName) => ({
-  elementary, beach, forest, rose, sunset
+  elementary, beach, forest, rose, sunset, ocean
 }[name])
 
 export default chooseTheme
