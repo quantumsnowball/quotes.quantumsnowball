@@ -50,6 +50,11 @@ const forest = (mode: PaletteMode) => ({
     ...(mode === 'light'
       ? {
         // palette values for light mode
+        primary: {
+          main: '#2e7d32',
+          light: '#4caf50',
+          dark: '#1b5e20',
+        },
         background: {
           default: '#81c784',
           paper: '#a5d6a7',
