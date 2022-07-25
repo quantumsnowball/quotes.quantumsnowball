@@ -96,8 +96,34 @@ const rose = (mode: PaletteMode) => ({
   },
 })
 
+const sunset = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        primary: {
+          main: '#ed6c02',
+          light: '#ff9800',
+          dark: '#e65100',
+        },
+        background: {
+          default: '#ff8a65',
+          paper: '#ffab91',
+        },
+      }
+      : {
+        // palette values for dark mode
+        background: {
+          default: '#541200',
+          paper: '#672309',
+        },
+      }),
+  },
+})
+
 const chooseTheme = (name: ThemeName) => ({
-  elementary, beach, forest, rose
+  elementary, beach, forest, rose, sunset
 }[name])
 
 export default chooseTheme
