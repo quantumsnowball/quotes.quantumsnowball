@@ -44,8 +44,29 @@ const beach = (mode: PaletteMode) => ({
   },
 })
 
+const forest = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        background: {
+          default: '#81c784',
+          paper: '#a5d6a7',
+        },
+      }
+      : {
+        // palette values for dark mode
+        background: {
+          default: '#0f3311',
+          paper: '#173f1a',
+        },
+      }),
+  },
+})
+
 const chooseTheme = (name: ThemeName) => ({
-  elementary, beach
+  elementary, beach, forest
 }[name])
 
 export default chooseTheme
