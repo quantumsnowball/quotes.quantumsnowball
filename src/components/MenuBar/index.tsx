@@ -9,7 +9,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useTheme } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { themeActions } from '../../redux/slices/themeSlice'
-import MenuDrawer from './MenuDrawer'
+import MenuDrawer from '../MenuDrawer'
 import { useBoolean } from '../../hooks/useBoolean'
 
 
