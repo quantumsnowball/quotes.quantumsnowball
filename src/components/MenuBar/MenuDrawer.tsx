@@ -5,6 +5,7 @@ import {
 } from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { useSelector } from 'react-redux'
@@ -97,9 +98,9 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
         </Collapse>
         <Divider />
         <MenuButton
-          icon={<InboxIcon />}
+          icon={<HelpOutlineIcon />}
           text='About'
-          onClick={() => alert('Famous Quotes Version 1.3.0')}
+          onClick={() => alert(`Quotes ${process.env.REACT_APP_VERSION}`)}
         />
       </Box>
     </SwipeableDrawer>
