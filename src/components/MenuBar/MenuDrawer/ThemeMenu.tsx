@@ -1,5 +1,8 @@
 import { List, Collapse } from '@mui/material'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import SurfingIcon from '@mui/icons-material/Surfing'
+import ForestIcon from '@mui/icons-material/Forest'
 import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../../redux/slices/layoutSlice'
 import { useSelector } from 'react-redux'
@@ -23,19 +26,19 @@ function ThemeMenu() {
       <Collapse in={menuThemeExpanded} timeout="auto" unmountOnExit>
         <List>
           <MenuButton
-            icon={<ColorLensIcon />}
+            icon={<AutoAwesomeIcon />}
             text='Elementary'
             onClick={() => dispatch(themeActions.setTheme('elementary'))}
             level={1}
           />
           <MenuButton
-            icon={<ColorLensIcon />}
+            icon={<SurfingIcon />}
             text='Beach'
             onClick={() => dispatch(themeActions.setTheme('beach'))}
             level={1}
           />
           <MenuButton
-            icon={<ColorLensIcon />}
+            icon={<ForestIcon />}
             text='Forest'
             onClick={() => dispatch(themeActions.setTheme('forest'))}
             level={1}
