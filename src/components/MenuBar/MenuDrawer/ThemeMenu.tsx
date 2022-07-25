@@ -3,6 +3,9 @@ import ColorLensIcon from '@mui/icons-material/ColorLens'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import SurfingIcon from '@mui/icons-material/Surfing'
 import ForestIcon from '@mui/icons-material/Forest'
+import SpaIcon from '@mui/icons-material/Spa'
+import WbTwilightIcon from '@mui/icons-material/WbTwilight'
+import WavesIcon from '@mui/icons-material/Waves'
 import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../../redux/slices/layoutSlice'
 import { useSelector } from 'react-redux'
@@ -44,19 +47,19 @@ function ThemeMenu() {
             level={1}
           />
           <MenuButton
-            icon={<ForestIcon />}
+            icon={<SpaIcon />}
             text='Rose'
             onClick={() => dispatch(themeActions.setTheme('rose'))}
             level={1}
           />
           <MenuButton
-            icon={<ForestIcon />}
+            icon={<WbTwilightIcon />}
             text='Sunset'
             onClick={() => dispatch(themeActions.setTheme('sunset'))}
             level={1}
           />
           <MenuButton
-            icon={<ForestIcon />}
+            icon={<WavesIcon />}
             text='Ocean'
             onClick={() => dispatch(themeActions.setTheme('ocean'))}
             level={1}

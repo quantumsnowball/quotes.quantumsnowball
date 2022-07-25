@@ -9,6 +9,16 @@ import { RootState } from '../../../redux/store'
 import { MenuButton, MenuButtonGrouper } from './common'
 
 
+const reloadApp = () => {
+  window.location.reload()
+}
+
+const resetApp = () => {
+  window.sessionStorage.clear()
+  window.localStorage.clear()
+  window.location.reload()
+}
+
 function SettingsMenu() {
   const menuSettingsExpanded = useSelector((s: RootState) => s.layout.menuSettingsExpanded)
   const dispatch = useDispatch()
@@ -25,14 +35,14 @@ function SettingsMenu() {
         <List>
           <MenuButton
             icon={<SystemUpdateIcon />}
-            text='Update App'
-            onClick={() => alert('This will update the app to latest version.')}
+            text='Reload App'
+            onClick={reloadApp}
             level={1}
           />
           <MenuButton
             icon={<RestoreIcon />}
-            text='Reset App'
-            onClick={() => alert('This will reset app to default state. All settings will be lost!')}
+            text='Reset App Data'
+            onClick={resetApp}
             level={1}
           />
         </List>
