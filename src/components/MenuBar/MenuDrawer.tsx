@@ -13,15 +13,20 @@ import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../redux/slices/layoutSlice'
 
 
-const MenuTitle = ({ title }: { title: string }) =>
+const MenuTitle = (
+  { title }:
+    { title: string }
+) =>
   <List>
     <ListItem>
       <ListItemText primary={title} />
     </ListItem>
   </List>
 
-const MenuButton = ({ icon, text, onClick, level = 0 }:
-  { icon: JSX.Element, text: string, onClick?: () => void | null, level?: number }) =>
+const MenuButton = (
+  { icon, text, onClick, level = 0 }:
+    { icon: JSX.Element, text: string, onClick?: () => void | null, level?: number }
+) =>
   <ListItem key={text} disablePadding>
     <ListItemButton onClick={onClick} sx={{ paddingLeft: 2 + level * 2 }}>
       <ListItemIcon>
