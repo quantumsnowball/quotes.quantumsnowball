@@ -21,7 +21,7 @@ const reloadApp = () => {
 const resetApp = () => {
   window.sessionStorage.clear()
   window.localStorage.clear()
-  window.location.reload()
+  reloadApp()
 }
 
 const ConfirmDialog = (
