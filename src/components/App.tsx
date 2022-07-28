@@ -6,7 +6,7 @@ import BottomNav from '../components/BottomNav'
 import { BrowserRouter } from "react-router-dom"
 import { RootState } from '../redux/store'
 import { useSelector } from 'react-redux'
-import themeConfigs from '../styles/theme'
+import chooseTheme from '../styles/theme'
 
 
 // .app-ctn
@@ -26,11 +26,12 @@ const FlexColumnDiv = styled('div')`
 
 function App() {
   const mode = useSelector((s: RootState) => s.theme.mode)
-  const theme = useCallback(() => createTheme(themeConfigs(mode)), [mode])
+  const name = useSelector((s: RootState) => s.theme.name)
+  const theme = useCallback(() => createTheme(chooseTheme(name)(mode)), [name, mode])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme().palette.background.default
-  }, [mode, theme])
+  }, [theme])
 
   return (
     <ThemeProvider theme={theme}>
