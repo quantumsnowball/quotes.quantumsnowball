@@ -2,6 +2,7 @@ import {
   AppBar, Toolbar,
   Typography,
   IconButton,
+  useMediaQuery,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import LightModeIcon from '@mui/icons-material/LightMode'
@@ -16,6 +17,7 @@ import { useBoolean } from '../../hooks/useBoolean'
 function MenuBar() {
   const dispatch = useDispatch()
   const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const {
     value: menuOpen,
     setValue: setMenuOpen,
@@ -23,7 +25,7 @@ function MenuBar() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position={isMobile ? "fixed" : "static"}>
         <Toolbar>
           <IconButton
             size="large"

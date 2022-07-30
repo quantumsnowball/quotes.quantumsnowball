@@ -36,6 +36,7 @@ function Main() {
 
   return (
     <>
+      {isMobile ? <Box sx={{ minHeight: '56px' }} /> : null}
       <ScrollableDiv className='main-ctn'>
         <Routes>
           <Route path="/" element={explorerPage} />
