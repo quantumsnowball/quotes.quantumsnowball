@@ -8,7 +8,7 @@ import App from '../components/App'
 
 const defaultTheme = createTheme()
 
-test('render <App /> component', () => {
+it('renders <App /> component', () => {
   render(
     <Provider store={store}>
       <ThemeProvider theme={defaultTheme}>
