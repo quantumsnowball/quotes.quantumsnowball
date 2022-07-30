@@ -12,8 +12,8 @@ interface NextButtonProps {
 function NextButton({ fetchQuote }: NextButtonProps) {
   return (
     <Box sx={{
-      display: window.location.pathname === '/favorites' ? 'none' : 'inherit',
-      position: 'absolute',
+      display: ['/', '/explorer'].includes(window.location.pathname) ? 'inherit' : 'none',
+      position: 'fixed',
       bottom: 100,
       left: '50%',
       transform: "translateX(-50%)"

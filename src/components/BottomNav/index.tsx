@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { v4 } from 'uuid'
 import { useTheme } from '@mui/material/styles'
 import {
@@ -58,10 +58,17 @@ function BottomNav() {
         onChange={(_, newValue) => {
           setValue(newValue)
         }}
-        sx={{
-          minWidth: isMobile ? 0 : theme.breakpoints.values.sm,
+        sx={isMobile ? {
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          minWidth: 0,
           minHeight: "56px",
-          alignSelf: isMobile ? "stretch" : "center"
+        } : {
+          minWidth: theme.breakpoints.values.sm,
+          minHeight: "56px",
+          alignSelf: "center"
         }}
       >
         <BottomNavigationAction

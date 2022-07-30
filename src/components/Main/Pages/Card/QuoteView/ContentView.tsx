@@ -26,7 +26,10 @@ function ContentView({ quote, author, isMobile }: ContentViewProps) {
         </Typography>
         :
         <Stack>
-          {[...Array(7)].map((_, i) => <Skeleton key={i} />)}
+          {[...Array(7)].map((_, i) =>
+            <Skeleton key={i}
+              animation="wave"
+            />)}
         </Stack>}
       {author ?
         <Typography
@@ -42,7 +45,14 @@ function ContentView({ quote, author, isMobile }: ContentViewProps) {
           {author.text}
         </Typography>
         :
-        <Skeleton height="100px" width="40%" sx={{ alignSelf: 'flex-end' }} />}
+        <Skeleton
+          height="100px"
+          width="40%"
+          animation="wave"
+          sx={{
+            alignSelf: 'flex-end'
+          }}
+        />}
     </CardContent>
   )
 }
