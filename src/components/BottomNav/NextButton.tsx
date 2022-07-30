@@ -13,6 +13,7 @@ function NextButton({ fetchQuote }: NextButtonProps) {
   return (
     <Box sx={{
       display: ['/', '/explorer'].includes(window.location.pathname) ? 'inherit' : 'none',
+      position: 'fixed',
       bottom: 100,
       left: '50%',
       transform: "translateX(-50%)"
