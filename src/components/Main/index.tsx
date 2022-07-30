@@ -1,4 +1,7 @@
-import { styled } from '@mui/material'
+import {
+  Box,
+  styled, useMediaQuery, useTheme
+} from '@mui/material'
 import { ExplorerQuoteCard, FavoritesQuoteCard } from './Pages/Card'
 import { Routes, Route } from 'react-router-dom'
 import Page from './Pages'
@@ -23,6 +26,8 @@ const ScrollableDiv = styled('div')`
 `
 
 function Main() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const explorerItems = useSelector(((s: RootState) => s.explorer.entries))
   const favoritesItems = useSelector(((s: RootState) => s.favorities.entries))
 
@@ -38,6 +43,7 @@ function Main() {
           <Route path="/favorites" element={favoritesPage} />
         </Routes>
       </ScrollableDiv>
+      {isMobile ? <Box sx={{ minHeight: '56px' }} /> : null}
     </>
   )
 }
