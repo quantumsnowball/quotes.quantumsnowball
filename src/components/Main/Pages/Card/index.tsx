@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CardActions,
-  IconButton,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteIcon from '@mui/icons-material/Favorite'

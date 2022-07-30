@@ -1,9 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import {
-  Container, Stack,
-  Card, CardContent,
-  Typography,
-  Skeleton,
+  Container, Card,
   useMediaQuery, styled
 } from '@mui/material'
 import { CardContentProps } from '../'
