@@ -23,26 +23,26 @@ export function ExplorerQuoteCard(props: CardContentProps) {
 
   const cardActions =
     <CardActions disableSpacing>
-      <IconButton
-        color="secondary"
-        aria-label="add to favorites"
+      <Button
+        color="success"
+        startIcon={<FavoriteIcon />}
         onClick={e => {
           e.stopPropagation()
           dispatch(favoritesActions.pushEntry({ ...entry, expanded: false }))
           dispatch(explorerActions.removeEntry(index))
         }}>
-        <FavoriteIcon />
-      </IconButton>
+        SAVE
+      </Button>
       <Box sx={{ flexGrow: 1 }} />
-      <IconButton
+      <Button
         color="error"
-        aria-label="delete from explorer"
+        startIcon={<DeleteIcon />}
         onClick={e => {
           e.stopPropagation()
           dispatch(explorerActions.removeEntry(index))
         }}>
-        <DeleteIcon />
-      </IconButton>
+        DELETE
+      </Button>
     </CardActions>
 
   const toggleExpanded = () => dispatch(explorerActions.toggleExpanded(index))
@@ -57,15 +57,15 @@ export function FavoritesQuoteCard(props: CardContentProps) {
   const cardActions =
     <CardActions disableSpacing>
       <Box sx={{ flexGrow: 1 }} />
-      <IconButton
+      <Button
         color="error"
-        aria-label="delete from favorites"
+        startIcon={<DeleteIcon />}
         onClick={e => {
           e.stopPropagation()
           dispatch(favoritesActions.removeEntry(index))
         }}>
-        <DeleteIcon />
-      </IconButton>
+        DELETE
+      </Button>
     </CardActions>
 
   const toggleExpanded = () => dispatch(favoritesActions.toggleExpanded(index))
